@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<p>{% blocktrans trimmed %}
+    After you submitted your order, we will redirect you to Sofort to complete your payment.
+    You will then be redirected back here to get your tickets.
+{% endblocktrans %}</p>
+<noscript>
+    <div class="alert alert-warning">
+        {% trans "You need to turn on JavaScript for this payment method to work." %}
+    </div>
+</noscript>
