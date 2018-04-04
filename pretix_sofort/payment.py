@@ -125,7 +125,6 @@ class Sofort(BasePaymentProvider):
                 build_absolute_uri(self.event, 'plugins:pretix_sofort:webhook')
             ],
         )
-        # TODO: Error handling
         try:
             trans = sofort.NewTransaction.from_xml(self._api_call(r.to_xml()))
         except sofort.SofortError as e:

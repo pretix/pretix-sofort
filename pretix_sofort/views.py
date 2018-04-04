@@ -64,7 +64,6 @@ def redirect_view(request, *args, **kwargs):
 
 
 def process_result(request, order, transaction, log=False, warn=True):
-    # TODO: Error handling
     s = Sofort(request.event)
     r = sofort.TransactionRequest(transactions=[transaction])
     try:
