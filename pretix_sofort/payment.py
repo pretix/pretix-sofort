@@ -125,7 +125,7 @@ class Sofort(BasePaymentProvider):
         # TODO: Error handling
         trans = sofort.NewTransaction.from_xml(self._api_call(r.to_xml()))
         ReferencedSofortTransaction.objects.get_or_create(order=order, reference=trans.transaction)
-        order.payment_info = json.dumps({'transaction': trans.transaction, 'state': 'initiated'})
+        order.payment_info = json.dumps({'transaction': trans.transaction, 'status': 'initiated'})
         order.save(update_fields=['payment_info'])
         return self.redirect(request, trans.payment_url)
 

@@ -19,6 +19,22 @@
             <dt>{% trans "Transaction" %}</dt>
             <dd>{{ payment_info.transaction }}</dd>
         {% endif %}
+        {% if payment_info.time %}
+            <dt>{% trans "Time" %}</dt>
+            <dd>{{ payment_info.time }}</dd>
+        {% endif %}
+        {% if payment_info.time %}
+            <dt>{% trans "Status" %}</dt>
+            <dd>{{ payment_info.status }}</dd>
+        {% endif %}
+        {% if payment_info.sender %}
+            <dt>{% trans "Payer name" %}</dt>
+            <dd>{{ payment_info.sender.holder }}</dd>
+            <dt>{% trans "IBAN" %}</dt>
+            <dd>{{ payment_info.sender.iban }}</dd>
+            <dt>{% trans "Bank" %}</dt>
+            <dd>{{ payment_info.sender.bank_name }}</dd>
+        {% endif %}
     </dl>
 {% else %}
     <p>{% blocktrans trimmed %}

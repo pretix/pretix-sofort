@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<p>
+    {% url "control:event.order" organizer=event.organizer.slug event=event.slug code=data.order as ourl %}
+    {% blocktrans trimmed with trans=data.transaction %}
+        The Sofort transaction {{ trans }} has succeeded, but the order {{ order }} is
+        expired and the product was sold out in the meantime. Therefore, the payment could not be accepted. Please
+        contact the user and refund the money via Sofort's interface.
+    {% endblocktrans %}
+</p>

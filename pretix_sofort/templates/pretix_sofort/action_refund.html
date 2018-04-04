@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<p>
+    {% url "control:event.order" organizer=event.organizer.slug event=event.slug code=data.order as ourl %}
+    {% blocktrans trimmed with trans=data.transaction %}
+        Sofort reported that the transaction {{ trans }} has been refunded.
+        Do you want to refund mark the matching order ({{ order }}) as refunded?
+    {% endblocktrans %}
+</p>
+<form class="form-inline" method="post" action="{% url "plugins:pretix_sofort:refund"  event=event.slug organizer=event.organizer.slug id=action.id %}">
+    {% csrf_token %}
+    <a href="{% url "control:event.requiredaction.discard" event=event.slug organizer=event.organizer.slug id=action.id %}"
+            class="btn btn-default">
+        {% trans "No" %}
+    </a>
+    <button type="submit" class="btn btn-default btn-danger">
+        {% trans "Yes, mark order as refunded" %}
+    </button>&nbsp;
+    {% trans "This action cannot be undone." %}
+</form>

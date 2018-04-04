@@ -13,14 +13,22 @@ def register_payment_provider(sender, **kwargs):
     return [Sofort]
 
 
-@receiver(signal=logentry_display, dispatch_uid="wirecard_logentry_display")
+@receiver(signal=logentry_display, dispatch_uid="sofort_logentry_display")
 def pretixcontrol_logentry_display(sender, logentry, **kwargs):
     if logentry.action_type != 'pretix_sofort.sofort.event':
         return
 
-    # TODO: implement
+    status_codes = {
+        'untraceable': _('Transaction started, no tracing possible'),
+        'refunded': _('Transaction refunded'),
+        'loss': _('Money not received'),
+        'pending': _('Money not yet received'),
+        'received': _('Money received'),
+    }
 
-    return _('Sofort reported an event: {}').format('')
+    return _('Sofort reported a status notification: {status}').format(
+        status=status_codes.get(logentry.parsed_data.get('status'), '?')
+    )
 
 
 @receiver(signal=requiredaction_display, dispatch_uid="sofort_requiredaction_display")
@@ -30,8 +38,10 @@ def pretixcontrol_action_display(sender, action, request, **kwargs):
 
     data = json.loads(action.data)
 
-    if action.action_type == 'pretixsofort.sofort.overpaid':
+    if action.action_type == 'pretix_sofort.sofort.overpaid':
         template = get_template('pretix_sofort/action_overpaid.html')
+    elif action.action_type == 'pretix_sofort.sofort.refund':
+        template = get_template('pretix_sofort/action_refund.html')
 
     ctx = {'data': data, 'event': sender, 'action': action}
     return template.render(ctx, request)

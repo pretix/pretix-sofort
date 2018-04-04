@@ -1,3 +1,4 @@
+import json
 import logging
 
 from lxml import etree
@@ -16,7 +17,7 @@ class SofortError(Exception):
 class MultiPay:
     def __init__(self, project_id, amount, currency_code, reasons, user_variables, success_url=None,
                  success_link_redirect=1, abort_url=None, timeout_url=None, notification_urls=None,
-                 beneficiary_identifier=None, beneficiary_country_code=None):
+                 beneficiary_identifier=None, beneficiary_country_code=None, timeout=3600):
         self.project_id = project_id
         self.amount = amount
         self.currency_code = currency_code
@@ -29,6 +30,7 @@ class MultiPay:
         self.notification_urls = notification_urls
         self.beneficiary_identifier = beneficiary_identifier
         self.beneficiary_country_code = beneficiary_country_code
+        self.timeout = timeout
 
     def to_xml(self):
         root = etree.Element('multipay')
@@ -43,6 +45,10 @@ class MultiPay:
 
         el = etree.Element('amount')
         el.text = str(self.amount)
+        root.append(el)
+
+        el = etree.Element('timeout')
+        el.text = str(self.timeout)
         root.append(el)
 
         el = etree.Element('currency_code')
@@ -119,3 +125,105 @@ class NewTransaction:
             payment_url=root.xpath('/new_transaction/payment_url')[0].text,
         )
 
+
+class TransactionRequest:
+    def __init__(self, transactions):
+        self.transactions = transactions
+
+    def to_xml(self):
+        root = etree.Element('transaction_request')
+        root.set('version', '2')
+
+        for t in self.transactions:
+            el = etree.Element('transaction')
+            el.text = str(t)
+            root.append(el)
+
+        xml = b'<?xml version="1.0" encoding="UTF-8" ?>\n' + etree.tostring(root, pretty_print=True)
+        logger.debug('Generated XML: ' + xml.decode())
+        return xml
+
+
+class TransactionDetails:
+    SIMPLE_FIELDS = (
+        'project_id', 'transaction', 'test', 'time', 'status', 'status_reason', 'status_modified',
+        'payment_method', 'language_code', 'amount', 'amount_refunded', 'currency_code', 'email_customer',
+        'phone_customer', 'exchange_rate'
+    )
+    MORE_FIELDS = ('reasons', 'user_variables', 'sender', 'recipient', 'costs')
+
+    def to_data(self, no_sepa_data=False):
+        d = {
+            t: getattr(self, t) for t in self.SIMPLE_FIELDS
+        }
+        d.update({
+            t: getattr(self, t) for t in self.MORE_FIELDS
+        })
+        if no_sepa_data:
+            if 'sender' in d['recipient']:
+                del d['sender']['account_number']
+            d['sender']['iban'] = (
+                d['sender']['iban'][:4]  + ('*' * (len(d['sender']['iban']) - 8)) + d['sender']['iban'][-4:]
+            )
+            if 'account_number' in d['recipient']:
+                del d['recipient']['account_number']
+            d['recipient']['iban'] = (
+                d['recipient']['iban'][:4]  + ('*' * (len(d['recipient']['iban']) - 8)) + d['recipient']['iban'][-4:]
+            )
+        return d
+
+    def to_json(self, no_sepa_data=False):
+        return json.dumps(self.to_data(no_sepa_data))
+
+
+class Transactions:
+    def __init__(self, details):
+        self.details = details
+
+    @classmethod
+    def from_xml(cls, xml):
+        root = etree.fromstring(xml)
+        if root.tag == 'errors':
+            raise SofortError(xml)
+
+        tdos = []
+        for td in root.xpath('/transactions/transaction_details'):
+            tdo = TransactionDetails()
+            for f in TransactionDetails.SIMPLE_FIELDS:
+                setattr(tdo, f, td.xpath('{}'.format(f))[0].text)
+
+            tdo.reasons = [
+                r.text for r in td.xpath('reasons/reason')
+            ]
+            tdo.user_variables = [
+                r.text for r in td.xpath('user_variables/user_variable')
+            ]
+            tdo.sender = {
+                r.tag: r.text for r in td.xpath('sender')[0]
+            }
+            tdo.recipient = {
+                r.tag: r.text for r in td.xpath('recipient')[0]
+            }
+            tdo.costs = {
+                r.tag: r.text for r in td.xpath('costs')[0]
+            }
+            tdos.append(tdo)
+
+        return cls(details=tdos)
+
+
+class StatusNotification:
+    def __init__(self, transaction, time):
+        self.transaction = transaction
+        self.time = time
+
+    @classmethod
+    def from_xml(cls, xml):
+        root = etree.fromstring(xml)
+        if root.tag == 'errors':
+            raise SofortError(xml)
+
+        return cls(
+            transaction=root.xpath('/status_notification/transaction')[0].text,
+            time=root.xpath('/status_notification/time')[0].text,
+        )
