@@ -126,7 +126,15 @@ class Sofort(BasePaymentProvider):
             ],
         )
         # TODO: Error handling
-        trans = sofort.NewTransaction.from_xml(self._api_call(r.to_xml()))
+        try:
+            trans = sofort.NewTransaction.from_xml(self._api_call(r.to_xml()))
+        except sofort.SofortError as e:
+            logger.exception('Failure during sofort payment: {}'.format(e.message))
+            raise PaymentException(_('Sofort reported an error: {}').format(e.message))
+        except IOError:
+            logger.exception('Failure during sofort payment.')
+            raise PaymentException(_('We had trouble communicating with Sofort. Please try again and get in touch '
+                                     'with us if this problem persists.'))
         ReferencedSofortTransaction.objects.get_or_create(order=order, reference=trans.transaction)
         order.payment_info = json.dumps({'transaction': trans.transaction, 'status': 'initiated'})
         order.save(update_fields=['payment_info'])
@@ -185,10 +193,15 @@ class Sofort(BasePaymentProvider):
                 reason_2=payment_info.get('transaction')
             )
         ])
-        d = self._api_call(r.to_xml())
-        print(d)
-        r = sofort.Refunds.from_xml(d)
-        print(r)
+        try:
+            sofort.Refunds.from_xml(self._api_call(r.to_xml()))
+        except sofort.SofortError as e:
+            logger.exception('Failure during sofort payment: {}'.format(e.message))
+            raise PaymentException(_('Sofort reported an error: {}').format(e.message))
+        except IOError:
+            logger.exception('Failure during sofort payment.')
+            raise PaymentException(_('We had trouble communicating with Sofort. Please try again and get in touch '
+                                     'with us if this problem persists.'))
 
     def order_control_refund_perform(self, request, order) -> "bool|str":
         if order.payment_info:

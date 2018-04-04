@@ -10,7 +10,15 @@ logger = logging.getLogger('pretix_sofort')
 
 
 class SofortError(Exception):
-    pass
+    def __init__(self, xml):
+        errors = etree.fromstring(xml)
+        strl = []
+        for e in errors:
+            strl.append(e.xpath('message')[0].text)
+        self.message = ', '.join(strl)
+
+    def __str__(self):
+        return self.message
 
 
 class MultiPay:
@@ -286,6 +294,8 @@ class Refunds:
             kwargs = {}
             for f in ('transaction', 'amount', 'comment', 'reason_1', 'reason_2', 'status'):
                 kwargs[f] = td.xpath('{}'.format(f))[0].text
+            if kwargs.get('status') == 'error':
+                raise SofortError(etree.tostring(td.xpath('errors')[0]))
             tdo = Refund(**kwargs)
             tdos.append(tdo)
 

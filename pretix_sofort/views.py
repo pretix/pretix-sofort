@@ -16,6 +16,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from pretix.base.models import Order, Quota, RequiredAction
+from pretix.base.payment import PaymentException
 from pretix.base.services.orders import mark_order_paid, mark_order_refunded
 from pretix.control.permissions import event_permission_required
 from pretix.multidomain.urlreverse import eventreverse
@@ -29,15 +30,22 @@ logger = logging.getLogger('pretix_sofort')
 
 @csrf_exempt
 def webhook(request, *args, **kwargs):
-    # TODO: Error handling
-    sn = sofort.StatusNotification.from_xml(request.body)
-
     try:
+        sn = sofort.StatusNotification.from_xml(request.body)
         rso = ReferencedSofortTransaction.objects.select_related('order', 'order__event').get(reference=sn.transaction)
         process_result(request, rso.order, sn.transaction, log=True, warn=False)
         return HttpResponse("OK")
+    except PaymentException as e:
+        logger.exception('Failure during sofort payment: {}'.format(e.message))
+        return HttpResponse("FAIL", status=500)
+    except sofort.SofortError as e:
+        logger.exception('Failure during sofort payment: {}'.format(e.message))
+        return HttpResponse("FAIL", status=500)
     except ReferencedSofortTransaction.DoesNotExist:
         raise Http404("Unknown transaction.")
+    except IOError as e:
+        logger.exception('Failure during sofort payment: {}'.format(e.message))
+        return HttpResponse("FAIL", status=500)
 
 
 @xframe_options_exempt
@@ -59,7 +67,15 @@ def process_result(request, order, transaction, log=False, warn=True):
     # TODO: Error handling
     s = Sofort(request.event)
     r = sofort.TransactionRequest(transactions=[transaction])
-    trans = sofort.Transactions.from_xml(s._api_call(r.to_xml()))
+    try:
+        trans = sofort.Transactions.from_xml(s._api_call(r.to_xml()))
+    except sofort.SofortError as e:
+        logger.exception('Failure during sofort payment: {}'.format(e.message))
+        raise PaymentException(_('Sofort reported an error: {}').format(e.message))
+    except IOError:
+        logger.exception('Failure during sofort payment.')
+        raise PaymentException(_('We had trouble communicating with Sofort. Please try again and get in touch '
+                                 'with us if this problem persists.'))
     if trans.details:
         td = trans.details[0]
         order.payment_info = td.to_json(no_sepa_data=True)
@@ -135,7 +151,10 @@ class ReturnView(View):
             messages.error(self.request, _('Sorry, there was an error in the payment process.'))
             return redirect(eventreverse(self.request.event, 'presale:event.index'))
 
-        process_result(request, self.order, request.GET.get("transaction"), log=False, warn=True)
+        try:
+            process_result(request, self.order, request.GET.get("transaction"), log=False, warn=True)
+        except PaymentException as e:
+            messages.error(self.request, str(e))
         return self._redirect_to_order()
 
     def _redirect_to_order(self):
