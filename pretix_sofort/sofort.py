@@ -2,10 +2,9 @@ import json
 import logging
 
 from lxml import etree
-
 from pretix import __version__ as pversion
-from . import __version__
 
+from . import __version__
 
 logger = logging.getLogger('pretix_sofort')
 
@@ -227,3 +226,67 @@ class StatusNotification:
             transaction=root.xpath('/status_notification/transaction')[0].text,
             time=root.xpath('/status_notification/time')[0].text,
         )
+
+
+class Refund:
+    def __init__(self, transaction, amount, comment, reason_1, reason_2, status='created'):
+        self.transaction = transaction
+        self.amount = amount
+        self.comment = comment
+        self.reason_1 = reason_1
+        self.reason_2 = reason_2
+        self.status = status
+
+
+class Refunds:
+    def __init__(self, refunds):
+        self.refunds = refunds
+
+    def to_xml(self):
+        root = etree.Element('refunds')
+        root.set('version', '3')
+
+        for t in self.refunds:
+            el = etree.Element('refund')
+
+            rel = etree.Element('transaction')
+            rel.text = t.transaction
+            el.append(rel)
+
+            rel = etree.Element('amount')
+            rel.text = str(t.amount)
+            el.append(rel)
+
+            rel = etree.Element('comment')
+            rel.text = t.comment
+            el.append(rel)
+
+            rel = etree.Element('reason_1')
+            rel.text = t.reason_1
+            el.append(rel)
+
+            rel = etree.Element('reason_2')
+            rel.text = t.reason_2
+            el.append(rel)
+
+            root.append(el)
+
+        xml = b'<?xml version="1.0" encoding="UTF-8" ?>\n' + etree.tostring(root, pretty_print=True)
+        logger.debug('Generated XML: ' + xml.decode())
+        return xml
+
+    @classmethod
+    def from_xml(cls, xml):
+        root = etree.fromstring(xml)
+        if root.tag == 'errors':
+            raise SofortError(xml)
+
+        tdos = []
+        for td in root.xpath('/refunds/refund'):
+            kwargs = {}
+            for f in ('transaction', 'amount', 'comment', 'reason_1', 'reason_2', 'status'):
+                kwargs[f] = td.xpath('{}'.format(f))[0].text
+            tdo = Refund(**kwargs)
+            tdos.append(tdo)
+
+        return cls(tdos)

@@ -5,8 +5,8 @@ import logging
 from django.contrib import messages
 from django.core import signing
 from django.db import transaction
-from django.http import HttpResponseBadRequest, Http404, HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404, HttpResponse, HttpResponseBadRequest
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
@@ -15,11 +15,11 @@ from django.views import View
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-
 from pretix.base.models import Order, Quota, RequiredAction
 from pretix.base.services.orders import mark_order_paid, mark_order_refunded
 from pretix.control.permissions import event_permission_required
 from pretix.multidomain.urlreverse import eventreverse
+
 from . import sofort
 from .models import ReferencedSofortTransaction
 from .payment import Sofort

@@ -7,12 +7,14 @@ from urllib.parse import parse_qs
 
 import requests
 from django import forms
+from django.contrib import messages
 from django.core import signing
 from django.template.loader import get_template
 from django.utils.translation import ugettext_lazy as _
-
-from pretix.base.payment import BasePaymentProvider
+from pretix.base.payment import BasePaymentProvider, PaymentException
+from pretix.base.services.orders import mark_order_refunded
 from pretix.multidomain.urlreverse import build_absolute_uri
+
 from . import sofort
 from .models import ReferencedSofortTransaction
 
@@ -24,7 +26,8 @@ class RefundForm(forms.Form):
         initial='auto',
         label=_('Refund automatically?'),
         choices=(
-            ('auto', _('Automatically refund charge with Sofort')),
+            ('auto', _('Automatically prepare refund with Sofort. You still need to consolidate and send out the '
+                       'refund with Sofort manually!')),
             ('manual', _('Do not send refund instruction to Sofort, only mark as refunded in pretix'))
         ),
         widget=forms.RadioSelect,
@@ -156,7 +159,10 @@ class Sofort(BasePaymentProvider):
 
     @property
     def refund_available(self):
-        return False  # TODO: Implement?
+        return True
+
+    def _refund_form(self, request):
+        return RefundForm(data=request.POST if request.method == "POST" else None)
 
     def order_control_refund_render(self, order, request) -> str:
         if self.refund_available:
@@ -169,5 +175,52 @@ class Sofort(BasePaymentProvider):
         else:
             return super().order_control_refund_render(order, request)
 
+    def _refund(self, payment_info, order):
+        r = sofort.Refunds(refunds=[
+            sofort.Refund(
+                transaction=payment_info.get('transaction'),
+                amount=order.total,
+                comment=order.full_code,
+                reason_1=order.full_code,
+                reason_2=payment_info.get('transaction')
+            )
+        ])
+        d = self._api_call(r.to_xml())
+        print(d)
+        r = sofort.Refunds.from_xml(d)
+        print(r)
+
     def order_control_refund_perform(self, request, order) -> "bool|str":
-        pass
+        if order.payment_info:
+            payment_info = json.loads(order.payment_info)
+        else:
+            payment_info = None
+
+        if not payment_info or not self.refund_available:
+            mark_order_refunded(order, user=request.user)
+            messages.warning(request, _('We were unable to transfer the money back automatically. '
+                                        'Please get in touch with the customer and transfer it back manually.'))
+            return
+
+        f = self._refund_form(request)
+        if not f.is_valid():
+            messages.error(request, _('Your input was invalid, please try again.'))
+            return
+        elif f.cleaned_data.get('auto_refund') == 'manual':
+            order = mark_order_refunded(order, user=request.user)
+            order.payment_manual = True
+            order.save()
+            return
+
+        try:
+            self._refund(
+                payment_info, order
+            )
+        except PaymentException as e:
+            messages.error(request, str(e))
+        except requests.exceptions.RequestException as e:
+            logger.exception('Sofort error: %s' % str(e))
+            messages.error(request, _('We had trouble communicating with Sofort. Please try again and contact '
+                                      'support if the problem persists.'))
+        else:
+            mark_order_refunded(order, user=request.user)

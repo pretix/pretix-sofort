@@ -3,8 +3,10 @@ import json
 from django.dispatch import receiver
 from django.template.loader import get_template
 from django.utils.translation import ugettext_lazy as _
+from pretix.base.signals import (
+    logentry_display, register_payment_providers, requiredaction_display,
+)
 
-from pretix.base.signals import register_payment_providers, logentry_display, requiredaction_display
 from .payment import Sofort
 
 

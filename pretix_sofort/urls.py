@@ -1,7 +1,7 @@
-from django.conf.urls import url, include
-
+from django.conf.urls import include, url
 from pretix.multidomain import event_url
-from .views import webhook, redirect_view, ReturnView, refund
+
+from .views import ReturnView, redirect_view, refund, webhook
 
 urlpatterns = [
     url(r'^control/event/(?P<organizer>[^/]+)/(?P<event>[^/]+)/sofort/refund/(?P<id>\d+)/',

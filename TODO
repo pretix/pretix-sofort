@@ -1,7 +1,7 @@
 - [x] process response
 - [x] process webhook
 - [x] logdisplay
-- [ ] refunds https://www.sofort.com/integrationCenter-ger-DE/content/view/full/3363/
+- [x] refunds https://www.sofort.com/integrationCenter-ger-DE/content/view/full/3363/
 - [ ] proper error handling
 - [x] templates
 - [x] overpaid
