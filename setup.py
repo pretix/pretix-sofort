@@ -28,7 +28,7 @@ setup(
     version='1.0.0',
     description='pretix payment via Klarna Sofort',
     long_description=long_description,
-    url='//github.com/pretix/pretix-sofort',
+    url='https://github.com/pretix/pretix-sofort',
     author='Raphael Michel',
     author_email='michel@rami.io',
     license='Apache Software License',
