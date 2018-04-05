@@ -1,8 +1,7 @@
 {% load i18n %}
 
 <p>
-    {% url "control:event.order" organizer=event.organizer.slug event=event.slug code=data.order as ourl %}
-    {% blocktrans trimmed with trans=data.transaction %}
+    {% blocktrans trimmed with trans=data.transaction order=data.order %}
         Sofort reported that the transaction {{ trans }} has been refunded.
         Do you want to refund mark the matching order ({{ order }}) as refunded?
     {% endblocktrans %}
