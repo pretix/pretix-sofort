@@ -85,7 +85,7 @@ def process_result(request, order, transaction, log=False, warn=True):
                                                                                    Order.STATUS_EXPIRED):
             try:
                 order.refresh_from_db()
-                mark_order_paid(order, user=None, provider='sofort')
+                mark_order_paid(order, user=None, provider='sofort', info=order.payment_info)
             except Quota.QuotaExceededException:
                 if not RequiredAction.objects.filter(event=request.event, action_type='pretix_sofort.sofort.overpaid',
                                                      data__icontains=order.code).exists():
