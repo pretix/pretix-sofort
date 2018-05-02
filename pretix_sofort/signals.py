@@ -3,9 +3,11 @@ import json
 from django.dispatch import receiver
 from django.template.loader import get_template
 from django.utils.translation import ugettext_lazy as _
+
+from pretix.base.shredder import BaseDataShredder
 from pretix.base.signals import (
     logentry_display, register_payment_providers, requiredaction_display,
-)
+    register_data_shredders)
 
 from .payment import Sofort
 
@@ -47,3 +49,34 @@ def pretixcontrol_action_display(sender, action, request, **kwargs):
 
     ctx = {'data': data, 'event': sender, 'action': action}
     return template.render(ctx, request)
+
+
+class PaymentLogsShredder(BaseDataShredder):
+    verbose_name = _('Sofort payment history')
+    identifier = 'sofort_logs'
+    description = _('This will remove payment-related history information. No download will be offered.')
+
+    def generate_files(self):
+        pass
+
+    def shred_data(self):
+        for le in self.event.logentry_set.filter(action_type="pretix_sofort.sofort.event").exclude(data=""):
+            d = le.parsed_data
+            new = {
+                '_shreded': True
+            }
+            for k in ('payment_method', 'amount', 'status_reason', 'time', 'exchange_rate', 'transaction',
+                      'currency_code', 'transaction', 'project_id', 'costs', 'status_modified', 'status', 'reasons',
+                      'language_code'):
+                if k in d:
+                    new[k] = d[k]
+            le.data = json.dumps(new)
+            le.shredded = True
+            le.save(update_fields=['data', 'shredded'])
+
+
+@receiver(register_data_shredders, dispatch_uid="sofort_shredders")
+def register_shredder(sender, **kwargs):
+    return [
+        PaymentLogsShredder,
+    ]

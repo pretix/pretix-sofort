@@ -11,6 +11,8 @@ from django.contrib import messages
 from django.core import signing
 from django.template.loader import get_template
 from django.utils.translation import ugettext_lazy as _
+
+from pretix.base.models import Order
 from pretix.base.payment import BasePaymentProvider, PaymentException
 from pretix.base.services.orders import mark_order_refunded
 from pretix.multidomain.urlreverse import build_absolute_uri
@@ -236,3 +238,18 @@ class Sofort(BasePaymentProvider):
                                       'support if the problem persists.'))
         else:
             mark_order_refunded(order, user=request.user)
+
+    def shred_payment_info(self, order: Order):
+        if not order.payment_info:
+            return
+        d = json.loads(order.payment_info)
+        new = {
+            '_shreded': True
+        }
+        for k in ('payment_method', 'amount', 'status_reason', 'time', 'exchange_rate', 'transaction',
+                  'currency_code', 'transaction', 'project_id', 'costs', 'status_modified', 'status', 'reasons',
+                  'language_code'):
+            if k in d:
+                new[k] = d[k]
+        order.payment_info = json.dumps(new)
+        order.save(update_fields=['payment_info'])
