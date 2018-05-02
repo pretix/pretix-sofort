@@ -3,10 +3,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-02 16:06+0200\n"
-"PO-Revision-Date: 2018-04-04 12:14+0000\n"
+"PO-Revision-Date: 2018-05-02 15:37+0000\n"
 "Last-Translator: Raphael Michel <michel@rami.io>\n"
-"Language-Team: German (informal) <https://translate.pretix.eu/projects/"
-"pretix/pretix-plugin-sofort/de_Informal/>\n"
+"Language-Team: German (informal) <https://translate.pretix.eu/projects/pretix"
+"/pretix-plugin-sofort/de_Informal/>\n"
 "Language: de_Informal\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -117,16 +117,16 @@ msgid "Sofort reported a status notification: {status}"
 msgstr "Sofortüberweisung hat einen neuen Status gemeldet: {status}"
 
 #: pretix_sofort/signals.py:55
-#, fuzzy
-#| msgid "Sofort payment"
 msgid "Sofort payment history"
-msgstr "Sofortüberweisung"
+msgstr "Sofortüberweisung-Zahlungsverlauf"
 
 #: pretix_sofort/signals.py:57
 msgid ""
 "This will remove payment-related history information. No download will be "
 "offered."
 msgstr ""
+"Dies entfernt persönliche Daten aus eingegangenen Zahlungsmitteilungen. Es "
+"wird kein Download angeboten."
 
 #: pretix_sofort/templates/pretix_sofort/action_overpaid.html:5
 #, python-format
