@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-04 13:21+0200\n"
+"POT-Creation-Date: 2018-05-02 16:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,88 +25,98 @@ msgstr ""
 msgid "pretix payment via Klarna Sofort"
 msgstr ""
 
-#: pretix_sofort/payment.py:27
+#: pretix_sofort/payment.py:29
 msgid "Refund automatically?"
 msgstr ""
 
-#: pretix_sofort/payment.py:29
+#: pretix_sofort/payment.py:31
 msgid ""
 "Automatically prepare refund with Sofort. You still need to consolidate and "
 "send out the refund with Sofort manually!"
 msgstr ""
 
-#: pretix_sofort/payment.py:31
+#: pretix_sofort/payment.py:33
 msgid ""
 "Do not send refund instruction to Sofort, only mark as refunded in pretix"
 msgstr ""
 
-#: pretix_sofort/payment.py:39
+#: pretix_sofort/payment.py:41
 msgid "Sofort"
 msgstr ""
 
-#: pretix_sofort/payment.py:47
+#: pretix_sofort/payment.py:49
 msgid "Customer ID"
 msgstr ""
 
-#: pretix_sofort/payment.py:51
+#: pretix_sofort/payment.py:53
 msgid "API key"
 msgstr ""
 
-#: pretix_sofort/payment.py:55
+#: pretix_sofort/payment.py:57
 msgid "Project ID"
 msgstr ""
 
-#: pretix_sofort/payment.py:132 pretix_sofort/payment.py:199
+#: pretix_sofort/payment.py:134 pretix_sofort/payment.py:201
 #: pretix_sofort/views.py:73
 msgid "Sofort reported an error: {}"
 msgstr ""
 
-#: pretix_sofort/payment.py:135 pretix_sofort/payment.py:202
+#: pretix_sofort/payment.py:137 pretix_sofort/payment.py:204
 #: pretix_sofort/views.py:76
 msgid ""
 "We had trouble communicating with Sofort. Please try again and get in touch "
 "with us if this problem persists."
 msgstr ""
 
-#: pretix_sofort/payment.py:213
+#: pretix_sofort/payment.py:215
 msgid ""
 "We were unable to transfer the money back automatically. Please get in touch "
 "with the customer and transfer it back manually."
 msgstr ""
 
-#: pretix_sofort/payment.py:219
+#: pretix_sofort/payment.py:221
 msgid "Your input was invalid, please try again."
 msgstr ""
 
-#: pretix_sofort/payment.py:235
+#: pretix_sofort/payment.py:237
 msgid ""
 "We had trouble communicating with Sofort. Please try again and contact "
 "support if the problem persists."
 msgstr ""
 
-#: pretix_sofort/signals.py:24
+#: pretix_sofort/signals.py:26
 msgid "Transaction started, no tracing possible"
 msgstr ""
 
-#: pretix_sofort/signals.py:25
+#: pretix_sofort/signals.py:27
 msgid "Transaction refunded"
 msgstr ""
 
-#: pretix_sofort/signals.py:26
+#: pretix_sofort/signals.py:28
 msgid "Money not received"
 msgstr ""
 
-#: pretix_sofort/signals.py:27
+#: pretix_sofort/signals.py:29
 msgid "Money not yet received"
 msgstr ""
 
-#: pretix_sofort/signals.py:28
+#: pretix_sofort/signals.py:30
 msgid "Money received"
 msgstr ""
 
-#: pretix_sofort/signals.py:31
+#: pretix_sofort/signals.py:33
 #, python-brace-format
 msgid "Sofort reported a status notification: {status}"
+msgstr ""
+
+#: pretix_sofort/signals.py:55
+msgid "Sofort payment history"
+msgstr ""
+
+#: pretix_sofort/signals.py:57
+msgid ""
+"This will remove payment-related history information. No download will be "
+"offered."
 msgstr ""
 
 #: pretix_sofort/templates/pretix_sofort/action_overpaid.html:5
@@ -118,22 +128,22 @@ msgid ""
 "Sofort's interface."
 msgstr ""
 
-#: pretix_sofort/templates/pretix_sofort/action_refund.html:5
+#: pretix_sofort/templates/pretix_sofort/action_refund.html:4
 #, python-format
 msgid ""
 "Sofort reported that the transaction %(trans)s has been refunded. Do you "
 "want to refund mark the matching order (%(order)s) as refunded?"
 msgstr ""
 
-#: pretix_sofort/templates/pretix_sofort/action_refund.html:14
+#: pretix_sofort/templates/pretix_sofort/action_refund.html:13
 msgid "No"
 msgstr ""
 
-#: pretix_sofort/templates/pretix_sofort/action_refund.html:17
+#: pretix_sofort/templates/pretix_sofort/action_refund.html:16
 msgid "Yes, mark order as refunded"
 msgstr ""
 
-#: pretix_sofort/templates/pretix_sofort/action_refund.html:19
+#: pretix_sofort/templates/pretix_sofort/action_refund.html:18
 msgid "This action cannot be undone."
 msgstr ""
 
@@ -142,10 +152,6 @@ msgstr ""
 msgid ""
 "After you submitted your order, we will redirect you to Sofort to complete "
 "your payment. You will then be redirected back here to get your tickets."
-msgstr ""
-
-#: pretix_sofort/templates/pretix_sofort/checkout_payment_form.html:9
-msgid "You need to turn on JavaScript for this payment method to work."
 msgstr ""
 
 #: pretix_sofort/templates/pretix_sofort/control.html:5
