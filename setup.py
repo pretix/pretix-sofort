@@ -25,7 +25,7 @@ cmdclass = {
 
 setup(
     name='pretix-sofort',
-    version='1.0.1',
+    version='1.2.0',
     description='pretix payment via Klarna Sofort',
     long_description=long_description,
     url='https://github.com/pretix/pretix-sofort',
