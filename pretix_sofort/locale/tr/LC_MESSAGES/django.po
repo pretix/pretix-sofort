@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-02 16:06+0200\n"
-"PO-Revision-Date: 2018-07-18 20:00+0000\n"
+"PO-Revision-Date: 2018-07-19 06:13+0000\n"
 "Last-Translator: Yunus Fırat Pişkin <firat.piskin@idvlabs.com>\n"
 "Language-Team: Turkish <https://translate.pretix.eu/projects/pretix/"
 "pretix-plugin-sofort/tr/>\n"
@@ -21,47 +21,51 @@ msgstr ""
 
 #: pretix_sofort/__init__.py:12
 msgid "Sofort payment"
-msgstr ""
+msgstr "Sofort ödemesi"
 
 #: pretix_sofort/__init__.py:14
 msgid "pretix payment via Klarna Sofort"
-msgstr ""
+msgstr "Klarna Sofort ile pretix ödemesi"
 
 #: pretix_sofort/payment.py:29
 msgid "Refund automatically?"
-msgstr ""
+msgstr "Otomatik iade?"
 
 #: pretix_sofort/payment.py:31
 msgid ""
 "Automatically prepare refund with Sofort. You still need to consolidate and "
 "send out the refund with Sofort manually!"
 msgstr ""
+"Sofort ile para iadesini otomatik olarak hazırlayın. Hala iadeyi Sofort ile "
+"birlikte konsolide etmeniz ve göndermeniz gerekiyor!"
 
 #: pretix_sofort/payment.py:33
 msgid ""
 "Do not send refund instruction to Sofort, only mark as refunded in pretix"
 msgstr ""
+"Geri ödeme talimatını Sofort'a göndermeyin, iade edildiğini sadece pretix'te "
+"işaretleyin"
 
 #: pretix_sofort/payment.py:41
 msgid "Sofort"
-msgstr ""
+msgstr "Sofort"
 
 #: pretix_sofort/payment.py:49
 msgid "Customer ID"
-msgstr ""
+msgstr "Müşteri kimliği"
 
 #: pretix_sofort/payment.py:53
 msgid "API key"
-msgstr ""
+msgstr "API anahtarı"
 
 #: pretix_sofort/payment.py:57
 msgid "Project ID"
-msgstr ""
+msgstr "Proje Kimliği"
 
 #: pretix_sofort/payment.py:134 pretix_sofort/payment.py:201
 #: pretix_sofort/views.py:73
 msgid "Sofort reported an error: {}"
-msgstr ""
+msgstr "Sofort bir hata bildirdi: {}"
 
 #: pretix_sofort/payment.py:137 pretix_sofort/payment.py:204
 #: pretix_sofort/views.py:76
@@ -69,51 +73,57 @@ msgid ""
 "We had trouble communicating with Sofort. Please try again and get in touch "
 "with us if this problem persists."
 msgstr ""
+"Sofort ile iletişimde sorun vardı. Lütfen tekrar deneyin ve bu sorun devam "
+"ederse bizimle iletişime geçin."
 
 #: pretix_sofort/payment.py:215
 msgid ""
 "We were unable to transfer the money back automatically. Please get in touch "
 "with the customer and transfer it back manually."
 msgstr ""
+"Parayı otomatik olarak geri transfer edemedik. Lütfen müşteri ile temasa "
+"geçin ve manuel olarak geri gönderin."
 
 #: pretix_sofort/payment.py:221
 msgid "Your input was invalid, please try again."
-msgstr ""
+msgstr "Girişiniz geçersiz, lütfen tekrar deneyin."
 
 #: pretix_sofort/payment.py:237
 msgid ""
 "We had trouble communicating with Sofort. Please try again and contact "
 "support if the problem persists."
 msgstr ""
+"Sofort ile iletişimde sorun vardı. Lütfen tekrar deneyin ve sorun devam "
+"ederse desteğe başvurun."
 
 #: pretix_sofort/signals.py:26
 msgid "Transaction started, no tracing possible"
-msgstr ""
+msgstr "İşlem başladı, takip edemezsiniz"
 
 #: pretix_sofort/signals.py:27
 msgid "Transaction refunded"
-msgstr ""
+msgstr "İşlem iade edildi"
 
 #: pretix_sofort/signals.py:28
 msgid "Money not received"
-msgstr ""
+msgstr "Para alınmadı"
 
 #: pretix_sofort/signals.py:29
 msgid "Money not yet received"
-msgstr ""
+msgstr "Para henüz alınmadı"
 
 #: pretix_sofort/signals.py:30
 msgid "Money received"
-msgstr ""
+msgstr "Para alındı"
 
 #: pretix_sofort/signals.py:33
 #, python-brace-format
 msgid "Sofort reported a status notification: {status}"
-msgstr ""
+msgstr "Sofort bir durum bildirimi bildirdi: {status}"
 
 #: pretix_sofort/signals.py:55
 msgid "Sofort payment history"
-msgstr ""
+msgstr "Sofort ödeme geçmişi"
 
 #: pretix_sofort/signals.py:57
 msgid ""
@@ -131,6 +141,10 @@ msgid ""
 "could not be accepted. Please contact the user and refund the money via "
 "Sofort's interface."
 msgstr ""
+"Sofort %(trans)s işlemi başarılı oldu, ancak %(order)s siparişinin süresi "
+"doldu ve bu arada ürün satıldı. Bu nedenle ödeme kabul edilemedi. Lütfen "
+"kullanıcıyla iletişime geçin ve Sofort'un arayüzü üzerinden para iadesi "
+"yapın."
 
 #: pretix_sofort/templates/pretix_sofort/action_refund.html:4
 #, python-format
@@ -138,6 +152,8 @@ msgid ""
 "Sofort reported that the transaction %(trans)s has been refunded. Do you "
 "want to refund mark the matching order (%(order)s) as refunded?"
 msgstr ""
+"Sofort, %(trans)s işleminin iade edildiğini bildirdi. Eşleşen %(order)s "
+"siparişini iade edilen şekilde işaretlemek ister misiniz?"
 
 #: pretix_sofort/templates/pretix_sofort/action_refund.html:13
 msgid "No"
@@ -157,16 +173,19 @@ msgid ""
 "After you submitted your order, we will redirect you to Sofort to complete "
 "your payment. You will then be redirected back here to get your tickets."
 msgstr ""
+"Siparişinizi verdikten sonra ödemenizi tamamlamak için sizi Sofort'a "
+"yönlendireceğiz. Biletlerinizi almak için buraya geri yönlendirileceksiniz."
 
 #: pretix_sofort/templates/pretix_sofort/control.html:5
 msgid "This order has been paid with Sofort."
-msgstr ""
+msgstr "Bu sipariş Sofort ile ödendi."
 
 #: pretix_sofort/templates/pretix_sofort/control.html:9
 msgid ""
 "This order has been planned to be paid with Sofort and has been marked as "
 "refunded."
 msgstr ""
+"Bu siparişin Sofort ile ödenmesi planlandı ve iade edildi olarak işaretlendi."
 
 #: pretix_sofort/templates/pretix_sofort/control.html:13
 #: pretix_sofort/templates/pretix_sofort/control.html:40
@@ -174,14 +193,15 @@ msgid ""
 "This order has been planned to be paid with Sofort, but the payment has not "
 "yet been completed."
 msgstr ""
+"Bu siparişin Sofort ile ödenmesi planlandı, ancak ödeme henüz tamamlanmadı."
 
 #: pretix_sofort/templates/pretix_sofort/control.html:19
 msgid "Transaction"
-msgstr ""
+msgstr "İşlem"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:23
 msgid "Time"
-msgstr ""
+msgstr "zaman"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:27
 msgid "Status"
@@ -189,27 +209,31 @@ msgstr "Durum"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:31
 msgid "Payer name"
-msgstr ""
+msgstr "Ödeme adı"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:33
 msgid "IBAN"
-msgstr ""
+msgstr "IBAN"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:35
 msgid "Bank"
-msgstr ""
+msgstr "Banka"
 
 #: pretix_sofort/templates/pretix_sofort/pending.html:4
 msgid ""
 "Our attempt to execute your payment has failed. Please try again or contact "
 "us."
 msgstr ""
+"Ödeme gerçekleştirme girişimimiz başarısız oldu. Lütfen tekrar deneyin veya "
+"bizimle iletişime geçin."
 
 #: pretix_sofort/templates/pretix_sofort/pending.html:8
 msgid ""
 "We're waiting for an answer regarding your payment. Please contact us, if "
 "this takes more than a few hours."
 msgstr ""
+"Ödemenizle ilgili bir cevap bekliyoruz. Bu birkaç saatten fazla sürerse, "
+"lütfen bize ulaşın."
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:17
 msgid "The payment process has started in a new window."
@@ -228,10 +252,13 @@ msgid ""
 "Your payment could not be handled as the event sold out in the meantime. "
 "Please contact the organizer for more information."
 msgstr ""
+"Ödemeniz, o sırada satılan etkinlik olarak ele alınamadı. Daha fazla bilgi "
+"için lütfen organizatöre başvurun."
 
 #: pretix_sofort/views.py:109
 msgid "The payment process has failed. You can click below to try again."
 msgstr ""
+"Ödeme işlemi başarısız oldu. Tekrar denemek için aşağıyı tıklayabilirsiniz."
 
 #: pretix_sofort/views.py:112
 msgid ""
@@ -239,14 +266,18 @@ msgid ""
 "We will send you an email once your payment is completed. If this takes "
 "longer than expected, contact the event organizer."
 msgstr ""
+"Ödeme işleminiz başladı ve tamamlanması biraz zaman alacak. Ödemeniz "
+"tamamlandığında size bir e-posta göndereceğiz. Bu beklenenden uzun sürerse "
+"etkinlik düzenleyicisine başvurun."
 
 #: pretix_sofort/views.py:139
 msgid "The payment process was canceled. You can click below to try again."
 msgstr ""
+"Ödeme işlemi iptal edildi. Tekrar denemek için aşağıyı tıklayabilirsiniz."
 
 #: pretix_sofort/views.py:150
 msgid "Sorry, there was an error in the payment process."
-msgstr ""
+msgstr "Üzgünüz, ödeme sürecinde bir hata oluştu."
 
 #: pretix_sofort/views.py:161
 msgid ""
