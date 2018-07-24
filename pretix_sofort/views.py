@@ -19,7 +19,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from pretix.base.models import Order, Quota, RequiredAction, OrderPayment, OrderRefund
 from pretix.base.payment import PaymentException
-from pretix.base.services.orders import mark_order_paid, mark_order_refunded
+from pretix.base.services.orders import mark_order_refunded
 from pretix.control.permissions import event_permission_required
 from pretix.multidomain.urlreverse import eventreverse
 
