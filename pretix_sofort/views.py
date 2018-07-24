@@ -5,24 +5,19 @@ from _decimal import Decimal
 
 from django.contrib import messages
 from django.core import signing
-from django.db import transaction
 from django.db.models import Sum
 from django.http import Http404, HttpResponse, HttpResponseBadRequest
-from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django.views import View
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
-from pretix.base.models import Order, Quota, RequiredAction, OrderPayment, OrderRefund
-from pretix.base.payment import PaymentException
-from pretix.base.services.orders import mark_order_refunded
-from pretix.control.permissions import event_permission_required
-from pretix.multidomain.urlreverse import eventreverse
 
+from pretix.base.models import Order, Quota, OrderPayment, OrderRefund
+from pretix.base.payment import PaymentException
+from pretix.multidomain.urlreverse import eventreverse
 from . import sofort
 from .models import ReferencedSofortTransaction
 from .payment import Sofort

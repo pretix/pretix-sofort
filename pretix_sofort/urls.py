@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from pretix.multidomain import event_url
 
-from .views import ReturnView, redirect_view, refund, webhook
+from .views import ReturnView, redirect_view, webhook
 
 event_patterns = [
     url(r'^sofort/', include([
