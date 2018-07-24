@@ -1,10 +1,12 @@
 import hashlib
 import json
 import logging
+from _decimal import Decimal
 
 from django.contrib import messages
 from django.core import signing
 from django.db import transaction
+from django.db.models import Sum
 from django.http import Http404, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -15,7 +17,7 @@ from django.views import View
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from pretix.base.models import Order, Quota, RequiredAction
+from pretix.base.models import Order, Quota, RequiredAction, OrderPayment, OrderRefund
 from pretix.base.payment import PaymentException
 from pretix.base.services.orders import mark_order_paid, mark_order_refunded
 from pretix.control.permissions import event_permission_required
@@ -33,7 +35,7 @@ def webhook(request, *args, **kwargs):
     try:
         sn = sofort.StatusNotification.from_xml(request.body)
         rso = ReferencedSofortTransaction.objects.select_related('order', 'order__event').get(reference=sn.transaction)
-        process_result(request, rso.order, sn.transaction, log=True, warn=False)
+        process_result(request, rso, sn.transaction, log=True, warn=False)
         return HttpResponse("OK")
     except PaymentException as e:
         logger.exception('Failure during sofort payment: {}'.format(e.message))
@@ -63,9 +65,10 @@ def redirect_view(request, *args, **kwargs):
     return r
 
 
-def process_result(request, order, transaction, log=False, warn=True):
+def process_result(request, rso, transaction, log=False, warn=True):
     s = Sofort(request.event)
     r = sofort.TransactionRequest(transactions=[transaction])
+
     try:
         trans = sofort.Transactions.from_xml(s._api_call(r.to_xml()))
     except sofort.SofortError as e:
@@ -75,36 +78,57 @@ def process_result(request, order, transaction, log=False, warn=True):
         logger.exception('Failure during sofort payment.')
         raise PaymentException(_('We had trouble communicating with Sofort. Please try again and get in touch '
                                  'with us if this problem persists.'))
+
+    if not rso.payment:
+        rso.payment = rso.order.payments.filter(
+            info__icontains=transaction,
+            provider__startswith='sofort',
+        ).last()
+        rso.save()
+
+    if not rso.payment:
+        rso.payment = rso.order.payments.create(
+            state=OrderPayment.PAYMENT_STATE_CREATED,
+            provider='sofort',
+            amount=trans.details[0]['amount'],
+            info=json.dumps({
+                {'transaction': transaction, 'status': 'initiated'}
+            }),
+        )
+        rso.save()
+
     if trans.details:
         td = trans.details[0]
-        order.payment_info = td.to_json(no_sepa_data=True)
-        order.save(update_fields=['payment_info'])
-        order.log_action('pretix_sofort.sofort.event', data=td.to_data(no_sepa_data=True))
+        rso.payment.info = td.to_json(no_sepa_data=True)
+        rso.payment.save(update_fields=['info'])
+        rso.order.log_action('pretix_sofort.sofort.event', data=td.to_data(no_sepa_data=True))
 
-        if td.status in ('pending', 'pending', 'untraceable') and order.status in (Order.STATUS_PENDING,
-                                                                                   Order.STATUS_EXPIRED):
+        if td.status in ('pending', 'received', 'untraceable') and rso.payment.state in (
+                OrderPayment.PAYMENT_STATE_CREATED, OrderPayment.PAYMENT_STATE_PENDING,
+                OrderPayment.PAYMENT_STATE_FAILED):
             try:
-                order.refresh_from_db()
-                mark_order_paid(order, user=None, provider='sofort', info=order.payment_info)
+                rso.payment.state = Order.STATUS_PENDING
+                rso.payment.confirm()
+                rso.payment.refresh_from_db()
             except Quota.QuotaExceededException:
-                if not RequiredAction.objects.filter(event=request.event, action_type='pretix_sofort.sofort.overpaid',
-                                                     data__icontains=order.code).exists():
-                    RequiredAction.objects.create(
-                        event=request.event, action_type='pretix_sofort.sofort.overpaid', data=json.dumps({
-                            'order': order.code,
-                            'transaction': transaction,
-                        })
-                    )
-                if warn:
-                    messages.error(request, _('Your payment could not be handled as the event sold out in the meantime.'
-                                              ' Please contact the organizer for more information.'))
-        elif td.status == 'refunded' and order.status == Order.STATUS_PAID:
-            RequiredAction.objects.create(
-                event=request.event, action_type='pretix_sofort.sofort.refund', data=json.dumps({
-                    'order': order.code,
-                    'transaction': transaction
-                })
-            )
+                raise PaymentException(_('Your payment could not be handled as the event sold out in the meantime. '
+                                         'Please contact the organizer for more information.'))
+        elif td.status == 'refunded' and rso.payment.state == OrderPayment.PAYMENT_STATE_CONFIRMED:
+            known_sum = rso.payment.refunds.filter(
+                state__in=(OrderRefund.REFUND_STATE_DONE, OrderRefund.REFUND_STATE_TRANSIT,
+                           OrderRefund.REFUND_STATE_CREATED, OrderRefund.REFUND_SOURCE_EXTERNAL)
+            ).aggregate(s=Sum('amount'))['s'] or Decimal('0.00')
+            total_refunded_amount = Decimal(td.amount_refunded)
+            if known_sum < total_refunded_amount:
+                rso.payment.create_external_refund(
+                    amount=total_refunded_amount - known_sum
+                )
+        elif td.status == 'loss':
+            rso.payment.state = OrderPayment.PAYMENT_STATE_FAILED
+            rso.payment.save()
+            if rso.order.pending_sum > 0:
+                rso.order.status = Order.STATUS_PENDING
+                rso.order.save()
         elif warn:
             messages.error(request, _('The payment process has failed. You can click below to try again.'))
     elif warn:
@@ -143,15 +167,15 @@ class ReturnView(View):
             return self._redirect_to_order()
 
         try:
-            ReferencedSofortTransaction.objects.get(
+            rso = ReferencedSofortTransaction.objects.get(
                 reference=request.GET.get("transaction"), order=self.order
             )
-        except ReferencedSofortTransaction:
+        except ReferencedSofortTransaction.DoesNotExist:
             messages.error(self.request, _('Sorry, there was an error in the payment process.'))
             return redirect(eventreverse(self.request.event, 'presale:event.index'))
 
         try:
-            process_result(request, self.order, request.GET.get("transaction"), log=False, warn=True)
+            process_result(request, rso, request.GET.get("transaction"), log=False, warn=True)
         except PaymentException as e:
             messages.error(self.request, str(e))
         return self._redirect_to_order()
