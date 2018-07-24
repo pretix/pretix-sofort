@@ -190,29 +190,3 @@ class ReturnView(View):
             'order': self.order.code,
             'secret': self.order.secret
         }) + ('?paid=yes' if self.order.status == Order.STATUS_PAID else ''))
-
-
-@event_permission_required('can_change_orders')
-@require_POST
-def refund(request, **kwargs):
-    with transaction.atomic():
-        action = get_object_or_404(RequiredAction, event=request.event, pk=kwargs.get('id'),
-                                   action_type='pretix_sofort.sofort.refund', done=False)
-        data = json.loads(action.data)
-        action.done = True
-        action.user = request.user
-        action.save()
-        order = get_object_or_404(Order, event=request.event, code=data['order'])
-        if order.status != Order.STATUS_PAID:
-            messages.error(request, _('The order cannot be marked as refunded as it is not marked as paid!'))
-        else:
-            mark_order_refunded(order, user=request.user)
-            messages.success(
-                request, _('The order has been marked as refunded and the issue has been marked as resolved!')
-            )
-
-    return redirect(reverse('control:event.order', kwargs={
-        'organizer': request.event.organizer.slug,
-        'event': request.event.slug,
-        'code': data['order']
-    }))
