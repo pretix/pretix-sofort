@@ -1,19 +1,6 @@
 {% load i18n %}
 
 {% if payment_info %}
-    {% if order.status == "p" %}
-        <p>{% blocktrans trimmed %}
-            This order has been paid with Sofort.
-        {% endblocktrans %}</p>
-    {% elif order.status == "r" %}
-        <p>{% blocktrans trimmed %}
-            This order has been planned to be paid with Sofort and has been marked as refunded.
-        {% endblocktrans %}</p>
-    {% else %}
-        <p>{% blocktrans trimmed %}
-            This order has been planned to be paid with Sofort, but the payment has not yet been completed.
-        {% endblocktrans %}</p>
-    {% endif %}
     <dl class="dl-horizontal">
         {% if payment_info.transaction %}
             <dt>{% trans "Transaction" %}</dt>
@@ -36,8 +23,4 @@
             <dd>{{ payment_info.sender.bank_name }}</dd>
         {% endif %}
     </dl>
-{% else %}
-    <p>{% blocktrans trimmed %}
-        This order has been planned to be paid with Sofort, but the payment has not yet been completed.
-    {% endblocktrans %}</p>
 {% endif %}

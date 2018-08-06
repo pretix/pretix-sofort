@@ -7,14 +7,14 @@ from urllib.parse import parse_qs
 
 import requests
 from django import forms
-from django.contrib import messages
 from django.core import signing
+from django.http import HttpRequest
 from django.template.loader import get_template
 from django.utils.translation import ugettext_lazy as _
+from typing import Union
 
-from pretix.base.models import Order
+from pretix.base.models import Order, OrderPayment, OrderRefund
 from pretix.base.payment import BasePaymentProvider, PaymentException
-from pretix.base.services.orders import mark_order_refunded
 from pretix.multidomain.urlreverse import build_absolute_uri
 
 from . import sofort
@@ -23,22 +23,10 @@ from .models import ReferencedSofortTransaction
 logger = logging.getLogger(__name__)
 
 
-class RefundForm(forms.Form):
-    auto_refund = forms.ChoiceField(
-        initial='auto',
-        label=_('Refund automatically?'),
-        choices=(
-            ('auto', _('Automatically prepare refund with Sofort. You still need to consolidate and send out the '
-                       'refund with Sofort manually!')),
-            ('manual', _('Do not send refund instruction to Sofort, only mark as refunded in pretix'))
-        ),
-        widget=forms.RadioSelect,
-    )
-
-
 class Sofort(BasePaymentProvider):
     identifier = 'sofort'
     verbose_name = _('Sofort')
+    abort_pending_allowed = False
 
     @property
     def settings_form_fields(self):
@@ -99,28 +87,28 @@ class Sofort(BasePaymentProvider):
         else:
             return str(url)
 
-    def payment_perform(self, request, order) -> str:
-        request.session['sofort_order_secret'] = order.secret
-        shash = hashlib.sha1(order.secret.lower().encode()).hexdigest()
+    def execute_payment(self, request: HttpRequest, payment: OrderPayment):
+        request.session['sofort_order_secret'] = payment.order.secret
+        shash = hashlib.sha1(payment.order.secret.lower().encode()).hexdigest()
         r = sofort.MultiPay(
             project_id=self.settings.get('project_id'),
-            amount=order.total,
+            amount=payment.amount,
             currency_code=self.event.currency,
             reasons=[
-                order.full_code,
+                payment.order.full_code,
                 '-TRANSACTION-'
             ],
-            user_variables=[order.full_code],
+            user_variables=[payment.order.full_code],
             success_url=build_absolute_uri(self.event, 'plugins:pretix_sofort:return', kwargs={
-                'order': order.code,
+                'order': payment.order.code,
                 'hash': shash,
             }) + '?state=success&transaction=-TRANSACTION-',
             abort_url=build_absolute_uri(self.event, 'plugins:pretix_sofort:return', kwargs={
-                'order': order.code,
+                'order': payment.order.code,
                 'hash': shash,
             }) + '?state=abort&transaction=-TRANSACTION-',
             timeout_url=build_absolute_uri(self.event, 'plugins:pretix_sofort:return', kwargs={
-                'order': order.code,
+                'order': payment.order.code,
                 'hash': shash,
             }) + '?state=timeout&transaction=-TRANSACTION-',
             notification_urls=[
@@ -136,62 +124,47 @@ class Sofort(BasePaymentProvider):
             logger.exception('Failure during sofort payment.')
             raise PaymentException(_('We had trouble communicating with Sofort. Please try again and get in touch '
                                      'with us if this problem persists.'))
-        ReferencedSofortTransaction.objects.get_or_create(order=order, reference=trans.transaction)
-        order.payment_info = json.dumps({'transaction': trans.transaction, 'status': 'initiated'})
-        order.save(update_fields=['payment_info'])
+        ReferencedSofortTransaction.objects.get_or_create(order=payment.order, reference=trans.transaction,
+                                                          payment=payment)
+        payment.info_data = {'transaction': trans.transaction, 'status': 'initiated'}
+        payment.save(update_fields=['info'])
         return self.redirect(request, trans.payment_url)
 
-    def order_pending_render(self, request, order) -> str:
+    def payment_pending_render(self, request: HttpRequest, payment: OrderPayment):
         retry = True
         try:
-            if order.payment_info and json.loads(order.payment_info)['paymentState'] == 'PENDING':
+            if payment.info_data.get('paymentState') == 'PENDING':
                 retry = False
         except KeyError:
             pass
         template = get_template('pretix_sofort/pending.html')
         ctx = {'request': request, 'event': self.event, 'settings': self.settings,
-               'retry': retry, 'order': order}
+               'retry': retry, 'order': payment.order}
         return template.render(ctx)
 
-    def order_control_render(self, request, order) -> str:
-        if order.payment_info:
-            payment_info = json.loads(order.payment_info)
-        else:
-            payment_info = None
+    def payment_control_render(self, request: HttpRequest, payment: OrderPayment):
         template = get_template('pretix_sofort/control.html')
         ctx = {'request': request, 'event': self.event, 'settings': self.settings,
-               'payment_info': payment_info, 'order': order, 'provname': self.verbose_name}
+               'payment_info': payment.info_data, 'order': payment.order, 'provname': self.verbose_name}
         return template.render(ctx)
 
     def order_can_retry(self, order):
         return True
 
-    @property
-    def refund_available(self):
+    def payment_refund_supported(self, payment: OrderPayment):
         return True
 
-    def _refund_form(self, request):
-        return RefundForm(data=request.POST if request.method == "POST" else None)
+    def payment_partial_refund_supported(self, payment: OrderPayment):
+        return True
 
-    def order_control_refund_render(self, order, request) -> str:
-        if self.refund_available:
-            template = get_template('pretix_sofort/control_refund.html')
-            ctx = {
-                'request': request,
-                'form': self._refund_form(request),
-            }
-            return template.render(ctx)
-        else:
-            return super().order_control_refund_render(order, request)
-
-    def _refund(self, payment_info, order):
+    def _refund(self, refund):
         r = sofort.Refunds(refunds=[
             sofort.Refund(
-                transaction=payment_info.get('transaction'),
-                amount=order.total,
-                comment=order.full_code,
-                reason_1=order.full_code,
-                reason_2=payment_info.get('transaction')
+                transaction=refund.payment.info_data.get('transaction'),
+                amount=refund.amount,
+                comment=refund.order.full_code,
+                reason_1=refund.order.full_code,
+                reason_2=refund.payment.info_data.get('transaction')
             )
         ])
         try:
@@ -204,45 +177,18 @@ class Sofort(BasePaymentProvider):
             raise PaymentException(_('We had trouble communicating with Sofort. Please try again and get in touch '
                                      'with us if this problem persists.'))
 
-    def order_control_refund_perform(self, request, order) -> "bool|str":
-        if order.payment_info:
-            payment_info = json.loads(order.payment_info)
-        else:
-            payment_info = None
-
-        if not payment_info or not self.refund_available:
-            mark_order_refunded(order, user=request.user)
-            messages.warning(request, _('We were unable to transfer the money back automatically. '
-                                        'Please get in touch with the customer and transfer it back manually.'))
-            return
-
-        f = self._refund_form(request)
-        if not f.is_valid():
-            messages.error(request, _('Your input was invalid, please try again.'))
-            return
-        elif f.cleaned_data.get('auto_refund') == 'manual':
-            order = mark_order_refunded(order, user=request.user)
-            order.payment_manual = True
-            order.save()
-            return
-
+    def execute_refund(self, refund: OrderRefund):
         try:
-            self._refund(
-                payment_info, order
-            )
-        except PaymentException as e:
-            messages.error(request, str(e))
+            self._refund(refund)
         except requests.exceptions.RequestException as e:
             logger.exception('Sofort error: %s' % str(e))
-            messages.error(request, _('We had trouble communicating with Sofort. Please try again and contact '
-                                      'support if the problem persists.'))
+            raise PaymentException(_('We had trouble communicating with Sofort. Please try again and contact '
+                                     'support if the problem persists.'))
         else:
-            mark_order_refunded(order, user=request.user)
+            refund.done()
 
-    def shred_payment_info(self, order: Order):
-        if not order.payment_info:
-            return
-        d = json.loads(order.payment_info)
+    def shred_payment_info(self, obj: Union[OrderPayment, OrderRefund]):
+        d = obj.info_data
         new = {
             '_shreded': True
         }
@@ -251,5 +197,18 @@ class Sofort(BasePaymentProvider):
                   'language_code'):
             if k in d:
                 new[k] = d[k]
-        order.payment_info = json.dumps(new)
-        order.save(update_fields=['payment_info'])
+        obj.info_data = new
+        obj.save(update_fields=['info'])
+        for le in obj.order.all_logentries().filter(action_type="pretix_sofort.sofort.event").exclude(data=""):
+            d = le.parsed_data
+            new = {
+                '_shreded': True
+            }
+            for k in ('payment_method', 'amount', 'status_reason', 'time', 'exchange_rate', 'transaction',
+                      'currency_code', 'transaction', 'project_id', 'costs', 'status_modified', 'status', 'reasons',
+                      'language_code'):
+                if k in d:
+                    new[k] = d[k]
+            le.data = json.dumps(new)
+            le.shredded = True
+            le.save(update_fields=['data', 'shredded'])
