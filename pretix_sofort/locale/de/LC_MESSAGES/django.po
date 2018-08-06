@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-02 16:06+0200\n"
+"POT-Creation-Date: 2018-08-06 12:34+0200\n"
 "PO-Revision-Date: 2018-05-02 15:40+0000\n"
 "Last-Translator: Raphael Michel <michel@rami.io>\n"
 "Language-Team: German <https://translate.pretix.eu/projects/pretix/pretix-"
@@ -22,48 +22,29 @@ msgstr "Sofortüberweisung"
 msgid "pretix payment via Klarna Sofort"
 msgstr "Sofortüberweisung für pretix"
 
-#: pretix_sofort/payment.py:29
-msgid "Refund automatically?"
-msgstr "Geld zurückbuchen?"
-
-#: pretix_sofort/payment.py:31
-msgid ""
-"Automatically prepare refund with Sofort. You still need to consolidate and "
-"send out the refund with Sofort manually!"
-msgstr ""
-"Automatisch Rückbuchung per Sofortüberweisung vorbereiten. Sie müssen die "
-"Rückbuchung immernoch im Interface von Sofort zusammenfassen und abschicken!"
-
-#: pretix_sofort/payment.py:33
-msgid ""
-"Do not send refund instruction to Sofort, only mark as refunded in pretix"
-msgstr ""
-"Rückbuchung nicht an Sofortüberweisung senden, nur in pretix als erstattet "
-"markieren"
-
-#: pretix_sofort/payment.py:41
+#: pretix_sofort/payment.py:28
 msgid "Sofort"
 msgstr "Sofortüberweisung"
 
-#: pretix_sofort/payment.py:49
+#: pretix_sofort/payment.py:37
 msgid "Customer ID"
 msgstr "Kundennummer"
 
-#: pretix_sofort/payment.py:53
+#: pretix_sofort/payment.py:41
 msgid "API key"
 msgstr "API-Schlüssel"
 
-#: pretix_sofort/payment.py:57
+#: pretix_sofort/payment.py:45
 msgid "Project ID"
 msgstr "Projekt-ID"
 
-#: pretix_sofort/payment.py:134 pretix_sofort/payment.py:201
-#: pretix_sofort/views.py:73
+#: pretix_sofort/payment.py:122 pretix_sofort/payment.py:174
+#: pretix_sofort/views.py:71
 msgid "Sofort reported an error: {}"
 msgstr "Sofortüberweisung hat einen Fehler gemeldet: {}"
 
-#: pretix_sofort/payment.py:137 pretix_sofort/payment.py:204
-#: pretix_sofort/views.py:76
+#: pretix_sofort/payment.py:125 pretix_sofort/payment.py:177
+#: pretix_sofort/views.py:74
 msgid ""
 "We had trouble communicating with Sofort. Please try again and get in touch "
 "with us if this problem persists."
@@ -71,19 +52,7 @@ msgstr ""
 "Wir konnten Sofortüberweisung nicht kontaktieren. Bitte versuchen Sie es "
 "erneut und melden Sie sich bei uns, wenn das Problem fortbesteht."
 
-#: pretix_sofort/payment.py:215
-msgid ""
-"We were unable to transfer the money back automatically. Please get in touch "
-"with the customer and transfer it back manually."
-msgstr ""
-"Wir konnten das Geld nicht automatisch zurückerstatten. Bitte setzen Sie "
-"sich mit dem Kunden in Verbindung und erstatten Sie es manuell zurück."
-
-#: pretix_sofort/payment.py:221
-msgid "Your input was invalid, please try again."
-msgstr "Deine Eingabe war ungültig, bitte erneut versuchen."
-
-#: pretix_sofort/payment.py:237
+#: pretix_sofort/payment.py:185
 msgid ""
 "We had trouble communicating with Sofort. Please try again and contact "
 "support if the problem persists."
@@ -91,42 +60,30 @@ msgstr ""
 "Wir konnten Sofortüberweisung nicht kontaktieren. Bitte versuchen Sie es "
 "erneut und melden Sie sich bei uns, wenn das Problem fortbesteht."
 
-#: pretix_sofort/signals.py:26
+#: pretix_sofort/signals.py:24
 msgid "Transaction started, no tracing possible"
 msgstr "Transaktion gestartet, keine Verfolgung möglich"
 
-#: pretix_sofort/signals.py:27
+#: pretix_sofort/signals.py:25
 msgid "Transaction refunded"
 msgstr "Transaktion erstattet"
 
-#: pretix_sofort/signals.py:28
+#: pretix_sofort/signals.py:26
 msgid "Money not received"
 msgstr "Geld nicht eingegangen"
 
-#: pretix_sofort/signals.py:29
+#: pretix_sofort/signals.py:27
 msgid "Money not yet received"
 msgstr "Geld noch nicht eingegangen"
 
-#: pretix_sofort/signals.py:30
+#: pretix_sofort/signals.py:28
 msgid "Money received"
 msgstr "Geld eingegangen"
 
-#: pretix_sofort/signals.py:33
+#: pretix_sofort/signals.py:31
 #, python-brace-format
 msgid "Sofort reported a status notification: {status}"
 msgstr "Sofortüberweisung hat einen neuen Status gemeldet: {status}"
-
-#: pretix_sofort/signals.py:55
-msgid "Sofort payment history"
-msgstr "Sofortüberweisung-Zahlungsverlauf"
-
-#: pretix_sofort/signals.py:57
-msgid ""
-"This will remove payment-related history information. No download will be "
-"offered."
-msgstr ""
-"Dies entfernt persönliche Daten aus eingegangenen Zahlungsmitteilungen. Es "
-"wird kein Download angeboten."
 
 #: pretix_sofort/templates/pretix_sofort/action_overpaid.html:5
 #, python-format
@@ -150,18 +107,6 @@ msgstr ""
 "Sofortüberweisung hat gemeldet, dass Transaktion %(trans)s zurückerstattet "
 "wurde. Soll auch die pretix-Bestellung (%(order)s 2) erstattet werden?"
 
-#: pretix_sofort/templates/pretix_sofort/action_refund.html:13
-msgid "No"
-msgstr "Nein"
-
-#: pretix_sofort/templates/pretix_sofort/action_refund.html:16
-msgid "Yes, mark order as refunded"
-msgstr "Die Bestellung als zurückerstattet markieren"
-
-#: pretix_sofort/templates/pretix_sofort/action_refund.html:18
-msgid "This action cannot be undone."
-msgstr "Diese Aktion kann nicht rückgängig gemacht werden."
-
 #: pretix_sofort/templates/pretix_sofort/checkout_payment_confirm.html:3
 #: pretix_sofort/templates/pretix_sofort/checkout_payment_form.html:3
 msgid ""
@@ -172,48 +117,27 @@ msgstr ""
 "um die Zahlung abzuschließen. Danach werden Sie wieder zurück zu diesem Shop "
 "geleitet."
 
-#: pretix_sofort/templates/pretix_sofort/control.html:5
-msgid "This order has been paid with Sofort."
-msgstr "Diese Bestellung wurde per Sofortüberweisung bezahlt."
-
-#: pretix_sofort/templates/pretix_sofort/control.html:9
-msgid ""
-"This order has been planned to be paid with Sofort and has been marked as "
-"refunded."
-msgstr ""
-"Diese Bestellung sollte per Sofortüberweisung bezahlt werden und ist nun als "
-"erstattet markiert."
-
-#: pretix_sofort/templates/pretix_sofort/control.html:13
-#: pretix_sofort/templates/pretix_sofort/control.html:40
-msgid ""
-"This order has been planned to be paid with Sofort, but the payment has not "
-"yet been completed."
-msgstr ""
-"Diese Bestellung sollte per Sofortüberweisung bezahlt werden, aber die "
-"Zahlung wurde nicht abgeschlossen."
-
-#: pretix_sofort/templates/pretix_sofort/control.html:19
+#: pretix_sofort/templates/pretix_sofort/control.html:6
 msgid "Transaction"
 msgstr "Transaktion"
 
-#: pretix_sofort/templates/pretix_sofort/control.html:23
+#: pretix_sofort/templates/pretix_sofort/control.html:10
 msgid "Time"
 msgstr "Zeit"
 
-#: pretix_sofort/templates/pretix_sofort/control.html:27
+#: pretix_sofort/templates/pretix_sofort/control.html:14
 msgid "Status"
 msgstr "Status"
 
-#: pretix_sofort/templates/pretix_sofort/control.html:31
+#: pretix_sofort/templates/pretix_sofort/control.html:18
 msgid "Payer name"
 msgstr "Name des Zahlenden"
 
-#: pretix_sofort/templates/pretix_sofort/control.html:33
+#: pretix_sofort/templates/pretix_sofort/control.html:20
 msgid "IBAN"
 msgstr "IBAN"
 
-#: pretix_sofort/templates/pretix_sofort/control.html:35
+#: pretix_sofort/templates/pretix_sofort/control.html:22
 msgid "Bank"
 msgstr "Bank"
 
@@ -247,7 +171,7 @@ msgstr ""
 msgid "Click here in order to open the window."
 msgstr "Hier klicken um das Fenster zu öffnen."
 
-#: pretix_sofort/views.py:99
+#: pretix_sofort/views.py:109
 msgid ""
 "Your payment could not be handled as the event sold out in the meantime. "
 "Please contact the organizer for more information."
@@ -256,13 +180,13 @@ msgstr ""
 "Zwischenzeit ausverkauft wurde. Bitte kontaktieren Sie den Veranstalter für "
 "weitere Schritte."
 
-#: pretix_sofort/views.py:109
+#: pretix_sofort/views.py:128
 msgid "The payment process has failed. You can click below to try again."
 msgstr ""
 "Die Bezahlung ist fehlgeschlagen. Sie können es weiter unten erneut "
 "versuchen."
 
-#: pretix_sofort/views.py:112
+#: pretix_sofort/views.py:131
 msgid ""
 "Your payment has been started processing and will take a while to complete. "
 "We will send you an email once your payment is completed. If this takes "
@@ -272,17 +196,17 @@ msgstr ""
 "senden Ihnen eine E-Mail, sobald Ihre Zahlung vollständig ist. Wenn dies "
 "länger dauert als erwartet, kontaktieren Sie den Veranstalter."
 
-#: pretix_sofort/views.py:139
+#: pretix_sofort/views.py:158
 msgid "The payment process was canceled. You can click below to try again."
 msgstr ""
 "Die Zahlung wurde abgebrochen. Sie können es mit dem untenstehenden Button "
 "erneut versuchen."
 
-#: pretix_sofort/views.py:150
+#: pretix_sofort/views.py:169
 msgid "Sorry, there was an error in the payment process."
 msgstr "Im Zahlungsvorgang ist ein Fehler aufgetreten."
 
-#: pretix_sofort/views.py:161
+#: pretix_sofort/views.py:180
 msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
@@ -291,18 +215,79 @@ msgstr ""
 "Sie auf den Link in der E-Mail, die wir Ihnen geschickt haben, um "
 "fortzufahren."
 
-#: pretix_sofort/views.py:183
-msgid "The order cannot be marked as refunded as it is not marked as paid!"
-msgstr ""
-"Die Bestellung kann nicht als erstattet markiert werden, da sie nicht als "
-"bezahlt markiert ist."
+#~ msgid "Refund automatically?"
+#~ msgstr "Geld zurückbuchen?"
 
-#: pretix_sofort/views.py:187
-msgid ""
-"The order has been marked as refunded and the issue has been marked as "
-"resolved!"
-msgstr ""
-"Die Bestellung wurde als erstattet und das Problem als gelöst markiert."
+#~ msgid ""
+#~ "Automatically prepare refund with Sofort. You still need to consolidate "
+#~ "and send out the refund with Sofort manually!"
+#~ msgstr ""
+#~ "Automatisch Rückbuchung per Sofortüberweisung vorbereiten. Sie müssen die "
+#~ "Rückbuchung immernoch im Interface von Sofort zusammenfassen und "
+#~ "abschicken!"
+
+#~ msgid ""
+#~ "Do not send refund instruction to Sofort, only mark as refunded in pretix"
+#~ msgstr ""
+#~ "Rückbuchung nicht an Sofortüberweisung senden, nur in pretix als "
+#~ "erstattet markieren"
+
+#~ msgid ""
+#~ "We were unable to transfer the money back automatically. Please get in "
+#~ "touch with the customer and transfer it back manually."
+#~ msgstr ""
+#~ "Wir konnten das Geld nicht automatisch zurückerstatten. Bitte setzen Sie "
+#~ "sich mit dem Kunden in Verbindung und erstatten Sie es manuell zurück."
+
+#~ msgid "Your input was invalid, please try again."
+#~ msgstr "Deine Eingabe war ungültig, bitte erneut versuchen."
+
+#~ msgid "Sofort payment history"
+#~ msgstr "Sofortüberweisung-Zahlungsverlauf"
+
+#~ msgid ""
+#~ "This will remove payment-related history information. No download will be "
+#~ "offered."
+#~ msgstr ""
+#~ "Dies entfernt persönliche Daten aus eingegangenen Zahlungsmitteilungen. "
+#~ "Es wird kein Download angeboten."
+
+#~ msgid "No"
+#~ msgstr "Nein"
+
+#~ msgid "Yes, mark order as refunded"
+#~ msgstr "Die Bestellung als zurückerstattet markieren"
+
+#~ msgid "This action cannot be undone."
+#~ msgstr "Diese Aktion kann nicht rückgängig gemacht werden."
+
+#~ msgid "This order has been paid with Sofort."
+#~ msgstr "Diese Bestellung wurde per Sofortüberweisung bezahlt."
+
+#~ msgid ""
+#~ "This order has been planned to be paid with Sofort and has been marked as "
+#~ "refunded."
+#~ msgstr ""
+#~ "Diese Bestellung sollte per Sofortüberweisung bezahlt werden und ist nun "
+#~ "als erstattet markiert."
+
+#~ msgid ""
+#~ "This order has been planned to be paid with Sofort, but the payment has "
+#~ "not yet been completed."
+#~ msgstr ""
+#~ "Diese Bestellung sollte per Sofortüberweisung bezahlt werden, aber die "
+#~ "Zahlung wurde nicht abgeschlossen."
+
+#~ msgid "The order cannot be marked as refunded as it is not marked as paid!"
+#~ msgstr ""
+#~ "Die Bestellung kann nicht als erstattet markiert werden, da sie nicht als "
+#~ "bezahlt markiert ist."
+
+#~ msgid ""
+#~ "The order has been marked as refunded and the issue has been marked as "
+#~ "resolved!"
+#~ msgstr ""
+#~ "Die Bestellung wurde als erstattet und das Problem als gelöst markiert."
 
 #~ msgid "You need to turn on JavaScript for this payment method to work."
 #~ msgstr ""

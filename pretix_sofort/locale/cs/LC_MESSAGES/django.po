@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-02 16:06+0200\n"
+"POT-Creation-Date: 2018-08-06 12:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -24,98 +24,63 @@ msgstr ""
 msgid "pretix payment via Klarna Sofort"
 msgstr ""
 
-#: pretix_sofort/payment.py:29
-msgid "Refund automatically?"
-msgstr ""
-
-#: pretix_sofort/payment.py:31
-msgid ""
-"Automatically prepare refund with Sofort. You still need to consolidate and "
-"send out the refund with Sofort manually!"
-msgstr ""
-
-#: pretix_sofort/payment.py:33
-msgid ""
-"Do not send refund instruction to Sofort, only mark as refunded in pretix"
-msgstr ""
-
-#: pretix_sofort/payment.py:41
+#: pretix_sofort/payment.py:28
 msgid "Sofort"
 msgstr ""
 
-#: pretix_sofort/payment.py:49
+#: pretix_sofort/payment.py:37
 msgid "Customer ID"
 msgstr ""
 
-#: pretix_sofort/payment.py:53
+#: pretix_sofort/payment.py:41
 msgid "API key"
 msgstr ""
 
-#: pretix_sofort/payment.py:57
+#: pretix_sofort/payment.py:45
 msgid "Project ID"
 msgstr ""
 
-#: pretix_sofort/payment.py:134 pretix_sofort/payment.py:201
-#: pretix_sofort/views.py:73
+#: pretix_sofort/payment.py:122 pretix_sofort/payment.py:174
+#: pretix_sofort/views.py:71
 msgid "Sofort reported an error: {}"
 msgstr ""
 
-#: pretix_sofort/payment.py:137 pretix_sofort/payment.py:204
-#: pretix_sofort/views.py:76
+#: pretix_sofort/payment.py:125 pretix_sofort/payment.py:177
+#: pretix_sofort/views.py:74
 msgid ""
 "We had trouble communicating with Sofort. Please try again and get in touch "
 "with us if this problem persists."
 msgstr ""
 
-#: pretix_sofort/payment.py:215
-msgid ""
-"We were unable to transfer the money back automatically. Please get in touch "
-"with the customer and transfer it back manually."
-msgstr ""
-
-#: pretix_sofort/payment.py:221
-msgid "Your input was invalid, please try again."
-msgstr ""
-
-#: pretix_sofort/payment.py:237
+#: pretix_sofort/payment.py:185
 msgid ""
 "We had trouble communicating with Sofort. Please try again and contact "
 "support if the problem persists."
 msgstr ""
 
-#: pretix_sofort/signals.py:26
+#: pretix_sofort/signals.py:24
 msgid "Transaction started, no tracing possible"
 msgstr ""
 
-#: pretix_sofort/signals.py:27
+#: pretix_sofort/signals.py:25
 msgid "Transaction refunded"
 msgstr ""
 
-#: pretix_sofort/signals.py:28
+#: pretix_sofort/signals.py:26
 msgid "Money not received"
 msgstr ""
 
-#: pretix_sofort/signals.py:29
+#: pretix_sofort/signals.py:27
 msgid "Money not yet received"
 msgstr ""
 
-#: pretix_sofort/signals.py:30
+#: pretix_sofort/signals.py:28
 msgid "Money received"
 msgstr ""
 
-#: pretix_sofort/signals.py:33
+#: pretix_sofort/signals.py:31
 #, python-brace-format
 msgid "Sofort reported a status notification: {status}"
-msgstr ""
-
-#: pretix_sofort/signals.py:55
-msgid "Sofort payment history"
-msgstr ""
-
-#: pretix_sofort/signals.py:57
-msgid ""
-"This will remove payment-related history information. No download will be "
-"offered."
 msgstr ""
 
 #: pretix_sofort/templates/pretix_sofort/action_overpaid.html:5
@@ -134,18 +99,6 @@ msgid ""
 "want to refund mark the matching order (%(order)s) as refunded?"
 msgstr ""
 
-#: pretix_sofort/templates/pretix_sofort/action_refund.html:13
-msgid "No"
-msgstr ""
-
-#: pretix_sofort/templates/pretix_sofort/action_refund.html:16
-msgid "Yes, mark order as refunded"
-msgstr ""
-
-#: pretix_sofort/templates/pretix_sofort/action_refund.html:18
-msgid "This action cannot be undone."
-msgstr ""
-
 #: pretix_sofort/templates/pretix_sofort/checkout_payment_confirm.html:3
 #: pretix_sofort/templates/pretix_sofort/checkout_payment_form.html:3
 msgid ""
@@ -153,44 +106,27 @@ msgid ""
 "your payment. You will then be redirected back here to get your tickets."
 msgstr ""
 
-#: pretix_sofort/templates/pretix_sofort/control.html:5
-msgid "This order has been paid with Sofort."
-msgstr ""
-
-#: pretix_sofort/templates/pretix_sofort/control.html:9
-msgid ""
-"This order has been planned to be paid with Sofort and has been marked as "
-"refunded."
-msgstr ""
-
-#: pretix_sofort/templates/pretix_sofort/control.html:13
-#: pretix_sofort/templates/pretix_sofort/control.html:40
-msgid ""
-"This order has been planned to be paid with Sofort, but the payment has not "
-"yet been completed."
-msgstr ""
-
-#: pretix_sofort/templates/pretix_sofort/control.html:19
+#: pretix_sofort/templates/pretix_sofort/control.html:6
 msgid "Transaction"
 msgstr ""
 
-#: pretix_sofort/templates/pretix_sofort/control.html:23
+#: pretix_sofort/templates/pretix_sofort/control.html:10
 msgid "Time"
 msgstr ""
 
-#: pretix_sofort/templates/pretix_sofort/control.html:27
+#: pretix_sofort/templates/pretix_sofort/control.html:14
 msgid "Status"
 msgstr ""
 
-#: pretix_sofort/templates/pretix_sofort/control.html:31
+#: pretix_sofort/templates/pretix_sofort/control.html:18
 msgid "Payer name"
 msgstr ""
 
-#: pretix_sofort/templates/pretix_sofort/control.html:33
+#: pretix_sofort/templates/pretix_sofort/control.html:20
 msgid "IBAN"
 msgstr ""
 
-#: pretix_sofort/templates/pretix_sofort/control.html:35
+#: pretix_sofort/templates/pretix_sofort/control.html:22
 msgid "Bank"
 msgstr ""
 
@@ -218,43 +154,33 @@ msgstr ""
 msgid "Click here in order to open the window."
 msgstr ""
 
-#: pretix_sofort/views.py:99
+#: pretix_sofort/views.py:109
 msgid ""
 "Your payment could not be handled as the event sold out in the meantime. "
 "Please contact the organizer for more information."
 msgstr ""
 
-#: pretix_sofort/views.py:109
+#: pretix_sofort/views.py:128
 msgid "The payment process has failed. You can click below to try again."
 msgstr ""
 
-#: pretix_sofort/views.py:112
+#: pretix_sofort/views.py:131
 msgid ""
 "Your payment has been started processing and will take a while to complete. "
 "We will send you an email once your payment is completed. If this takes "
 "longer than expected, contact the event organizer."
 msgstr ""
 
-#: pretix_sofort/views.py:139
+#: pretix_sofort/views.py:158
 msgid "The payment process was canceled. You can click below to try again."
 msgstr ""
 
-#: pretix_sofort/views.py:150
+#: pretix_sofort/views.py:169
 msgid "Sorry, there was an error in the payment process."
 msgstr ""
 
-#: pretix_sofort/views.py:161
+#: pretix_sofort/views.py:180
 msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
-msgstr ""
-
-#: pretix_sofort/views.py:183
-msgid "The order cannot be marked as refunded as it is not marked as paid!"
-msgstr ""
-
-#: pretix_sofort/views.py:187
-msgid ""
-"The order has been marked as refunded and the issue has been marked as "
-"resolved!"
 msgstr ""

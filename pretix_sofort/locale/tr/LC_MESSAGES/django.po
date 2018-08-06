@@ -88,7 +88,6 @@ msgstr ""
 msgid "Your input was invalid, please try again."
 msgstr "Girişiniz geçersiz, lütfen tekrar deneyin."
 
-#: pretix_sofort/payment.py:237
 msgid ""
 "We had trouble communicating with Sofort. Please try again and contact "
 "support if the problem persists."
@@ -247,7 +246,7 @@ msgstr "Ödeme verilerinizi girmek için pencere açılmamış veya kapatılmam�
 msgid "Click here in order to open the window."
 msgstr "Pencereyi açmak için buraya tıklayın."
 
-#: pretix_sofort/views.py:99
+#: pretix_sofort/views.py:109
 msgid ""
 "Your payment could not be handled as the event sold out in the meantime. "
 "Please contact the organizer for more information."
@@ -255,7 +254,7 @@ msgstr ""
 "Ödemeniz, o sırada satılan etkinlik olarak ele alınamadı. Daha fazla bilgi "
 "için lütfen organizatöre başvurun."
 
-#: pretix_sofort/views.py:109
+#: pretix_sofort/views.py:128
 msgid "The payment process has failed. You can click below to try again."
 msgstr ""
 "Ödeme işlemi başarısız oldu. Tekrar denemek için aşağıyı tıklayabilirsiniz."
