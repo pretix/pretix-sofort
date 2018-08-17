@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-02 16:06+0200\n"
-"PO-Revision-Date: 2018-07-19 06:13+0000\n"
+"PO-Revision-Date: 2018-08-17 16:00+0000\n"
 "Last-Translator: Yunus Fırat Pişkin <firat.piskin@idvlabs.com>\n"
 "Language-Team: Turkish <https://translate.pretix.eu/projects/pretix/"
 "pretix-plugin-sofort/tr/>\n"
@@ -212,7 +212,7 @@ msgstr "Ödeme adı"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:33
 msgid "IBAN"
-msgstr "IBAN"
+msgstr "İBAN"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:35
 msgid "Bank"
