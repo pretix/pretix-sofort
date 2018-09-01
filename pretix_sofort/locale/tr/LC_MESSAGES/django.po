@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-02 16:06+0200\n"
-"PO-Revision-Date: 2018-08-17 16:00+0000\n"
+"PO-Revision-Date: 2018-09-01 19:00+0000\n"
 "Last-Translator: Yunus Fırat Pişkin <firat.piskin@idvlabs.com>\n"
 "Language-Team: Turkish <https://translate.pretix.eu/projects/pretix/"
 "pretix-plugin-sofort/tr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.0.1\n"
+"X-Generator: Weblate 3.1.1\n"
 
 #: pretix_sofort/__init__.py:12
 msgid "Sofort payment"
@@ -208,7 +208,7 @@ msgstr "Durum"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:31
 msgid "Payer name"
-msgstr "Ödeme adı"
+msgstr "Ödeyenin adı"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:33
 msgid "IBAN"
