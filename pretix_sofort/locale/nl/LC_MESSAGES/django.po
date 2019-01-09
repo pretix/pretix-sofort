@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-11 17:58+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2019-01-09 14:50+0000\n"
+"Last-Translator: Maarten van den Berg <maartenberg1@gmail.com>\n"
+"Language-Team: Dutch <https://translate.pretix.eu/projects/pretix/"
+"pretix-plugin-sofort/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.1.1\n"
 
 #: pretix_sofort/__init__.py:12
 msgid "Sofort payment"
@@ -26,7 +29,7 @@ msgstr ""
 
 #: pretix_sofort/payment.py:28
 msgid "Sofort"
-msgstr ""
+msgstr "Sofort-betaling"
 
 #: pretix_sofort/payment.py:37
 msgid "Customer ID"
@@ -116,11 +119,11 @@ msgstr ""
 
 #: pretix_sofort/templates/pretix_sofort/control.html:14
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:18
 msgid "Payer name"
-msgstr ""
+msgstr "Naam betaler"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:20
 msgid "IBAN"
@@ -144,15 +147,15 @@ msgstr ""
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:17
 msgid "The payment process has started in a new window."
-msgstr ""
+msgstr "Het betalingsproces is begonnen in een nieuw venster."
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:20
 msgid "The window to enter your payment data was not opened or was closed?"
-msgstr ""
+msgstr "Is het venster om uw betaling uit te voeren niet geopend?"
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:24
 msgid "Click here in order to open the window."
-msgstr ""
+msgstr "Klik hier om het venster te openen."
 
 #: pretix_sofort/views.py:109
 msgid ""
@@ -184,3 +187,5 @@ msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
 msgstr ""
+"Sorry, er trad een fout op in het betalingsproces. Klik op de link in uw "
+"email om door te gaan."
