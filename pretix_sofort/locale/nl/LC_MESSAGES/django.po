@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-11 17:58+0200\n"
+"PO-Revision-Date: 2019-01-09 23:00+0000\n"
+"Last-Translator: Maarten van den Berg <maartenberg1@gmail.com>\n"
+"Language-Team: Dutch <https://translate.pretix.eu/projects/pretix/"
+"pretix-plugin-sofort/nl/>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.1.1\n"
+
+#: pretix_sofort/__init__.py:12
+msgid "Sofort payment"
+msgstr "Sofortbetaling"
+
+#: pretix_sofort/__init__.py:14
+msgid "pretix payment via Klarna Sofort"
+msgstr "pretix-betalingen via Klarna Sofort"
+
+#: pretix_sofort/payment.py:28
+msgid "Sofort"
+msgstr "Sofort-betaling"
+
+#: pretix_sofort/payment.py:37
+msgid "Customer ID"
+msgstr "Klantnummer"
+
+#: pretix_sofort/payment.py:41
+msgid "API key"
+msgstr "API-sleutel"
+
+#: pretix_sofort/payment.py:45
+msgid "Project ID"
+msgstr "Project-ID"
+
+#: pretix_sofort/payment.py:122 pretix_sofort/payment.py:174
+#: pretix_sofort/views.py:71
+msgid "Sofort reported an error: {}"
+msgstr "Sofort meldde een fout: {}"
+
+#: pretix_sofort/payment.py:125 pretix_sofort/payment.py:177
+#: pretix_sofort/views.py:74
+msgid ""
+"We had trouble communicating with Sofort. Please try again and get in touch "
+"with us if this problem persists."
+msgstr ""
+"We hadden moeite met het communiceren met Sofort. Probeer het opnieuw, en "
+"neem contact met ons op als dit probleem aanhoudt."
+
+#: pretix_sofort/payment.py:185
+msgid ""
+"We had trouble communicating with Sofort. Please try again and contact "
+"support if the problem persists."
+msgstr ""
+"We hadden problemen met het communiceren met Sofort. Probeer het opnieuw, en "
+"neem contact op met ons als het probleem aanhoudt."
+
+#: pretix_sofort/signals.py:24
+msgid "Transaction started, no tracing possible"
+msgstr "Transactie gestart, geen volgen mogelijk"
+
+#: pretix_sofort/signals.py:25
+msgid "Transaction refunded"
+msgstr "Transactie terugbetaald"
+
+#: pretix_sofort/signals.py:26
+msgid "Money not received"
+msgstr "Geld niet ontvangen"
+
+#: pretix_sofort/signals.py:27
+msgid "Money not yet received"
+msgstr "Geld nog niet ontvangen"
+
+#: pretix_sofort/signals.py:28
+msgid "Money received"
+msgstr "Geld ontvangen"
+
+#: pretix_sofort/signals.py:31
+#, python-brace-format
+msgid "Sofort reported a status notification: {status}"
+msgstr "Sofort heeft een nieuwe status gemeld: {status}"
+
+#: pretix_sofort/templates/pretix_sofort/action_overpaid.html:5
+#, python-format
+msgid ""
+"The Sofort transaction %(trans)s has succeeded, but the order %(order)s is "
+"expired and the product was sold out in the meantime. Therefore, the payment "
+"could not be accepted. Please contact the user and refund the money via "
+"Sofort's interface."
+msgstr ""
+"De Sofort-betaling %(trans)s is gelukt, maar de bestelling %(order)s is "
+"verlopen en het product is intussen uitverkocht. Hierom kon de betaling niet "
+"worden geaccepteerd. Neem contact op met de klant en betaal de bestelling "
+"terug via de interface van Sofort."
+
+#: pretix_sofort/templates/pretix_sofort/action_refund.html:4
+#, python-format
+msgid ""
+"Sofort reported that the transaction %(trans)s has been refunded. Do you "
+"want to refund mark the matching order (%(order)s) as refunded?"
+msgstr ""
+"Sofort meldde dat de transactie %(trans)s is terugbetaald. Wilt u de "
+"bijbehorende bestelling (%(order)s) als terugbetaald aanmerken?"
+
+#: pretix_sofort/templates/pretix_sofort/checkout_payment_confirm.html:3
+#: pretix_sofort/templates/pretix_sofort/checkout_payment_form.html:3
+msgid ""
+"After you submitted your order, we will redirect you to Sofort to complete "
+"your payment. You will then be redirected back here to get your tickets."
+msgstr ""
+"Nadat u uw bestelling heeft ingediend zullen we u naar Sofort doorverwijzen "
+"om de betaling uit te voeren. U zult hierna naar hier worden teruggestuurd "
+"om uw tickets te krijgen."
+
+#: pretix_sofort/templates/pretix_sofort/control.html:6
+msgid "Transaction"
+msgstr "Transactie"
+
+#: pretix_sofort/templates/pretix_sofort/control.html:10
+msgid "Time"
+msgstr "Tijd"
+
+#: pretix_sofort/templates/pretix_sofort/control.html:14
+msgid "Status"
+msgstr "Status"
+
+#: pretix_sofort/templates/pretix_sofort/control.html:18
+msgid "Payer name"
+msgstr "Naam betaler"
+
+#: pretix_sofort/templates/pretix_sofort/control.html:20
+msgid "IBAN"
+msgstr "IBAN"
+
+#: pretix_sofort/templates/pretix_sofort/control.html:22
+msgid "Bank"
+msgstr "Bank"
+
+#: pretix_sofort/templates/pretix_sofort/pending.html:4
+msgid ""
+"Our attempt to execute your payment has failed. Please try again or contact "
+"us."
+msgstr ""
+"Onze poging om uw betaling uit te voeren is mislukt. Probeer het opnieuw of "
+"neem contact met ons op."
+
+#: pretix_sofort/templates/pretix_sofort/pending.html:8
+msgid ""
+"We're waiting for an answer regarding your payment. Please contact us, if "
+"this takes more than a few hours."
+msgstr ""
+"We wachten op een antwoord over uw betaling. Neem contact met ons op als dit "
+"langer dan een paar uur duurt."
+
+#: pretix_sofort/templates/pretix_sofort/redirect.html:17
+msgid "The payment process has started in a new window."
+msgstr "Het betalingsproces is begonnen in een nieuw venster."
+
+#: pretix_sofort/templates/pretix_sofort/redirect.html:20
+msgid "The window to enter your payment data was not opened or was closed?"
+msgstr "Is het venster om uw betaling uit te voeren niet geopend?"
+
+#: pretix_sofort/templates/pretix_sofort/redirect.html:24
+msgid "Click here in order to open the window."
+msgstr "Klik hier om het venster te openen."
+
+#: pretix_sofort/views.py:109
+msgid ""
+"Your payment could not be handled as the event sold out in the meantime. "
+"Please contact the organizer for more information."
+msgstr ""
+"Uw betaling kon niet worden verwerkt omdat het evenement in de tussentijd is "
+"uitverkocht. Neem contact op met de organisator voor meer informatie."
+
+#: pretix_sofort/views.py:128
+msgid "The payment process has failed. You can click below to try again."
+msgstr ""
+"Het betalingsproces is mislukt. U kunt hieronder klikken om het opnieuw te "
+"proberen."
+
+#: pretix_sofort/views.py:131
+msgid ""
+"Your payment has been started processing and will take a while to complete. "
+"We will send you an email once your payment is completed. If this takes "
+"longer than expected, contact the event organizer."
+msgstr ""
+"Uw betaling wordt nu verwerkt, en kan even duren om te voltooien. We zullen "
+"u een email sturen wanneer uw betaling is voltooid. Neem contact op met de "
+"organisator van het evenement als dit langer duurt dan verwacht."
+
+#: pretix_sofort/views.py:158
+msgid "The payment process was canceled. You can click below to try again."
+msgstr ""
+"Het betalingsproces werd geannuleerd. U kunt hieronder klikken om het "
+"opnieuw te proberen."
+
+#: pretix_sofort/views.py:169
+msgid "Sorry, there was an error in the payment process."
+msgstr "Sorry, er is iets misgegaan in het betalingsproces."
+
+#: pretix_sofort/views.py:180
+msgid ""
+"Sorry, there was an error in the payment process. Please check the link in "
+"your emails to continue."
+msgstr ""
+"Sorry, er trad een fout op in het betalingsproces. Klik op de link in uw "
+"email om door te gaan."
