@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-11 17:58+0200\n"
-"PO-Revision-Date: 2019-03-09 16:00+0000\n"
+"PO-Revision-Date: 2019-03-13 19:00+0000\n"
 "Last-Translator: yichengsd <sunzl@jxepub.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.pretix.eu/projects/"
 "pretix/pretix-plugin-sofort/zh_Hans/>\n"
@@ -115,7 +115,7 @@ msgstr ""
 
 #: pretix_sofort/templates/pretix_sofort/control.html:10
 msgid "Time"
-msgstr ""
+msgstr "时间"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:14
 msgid "Status"
