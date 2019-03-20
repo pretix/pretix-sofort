@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-11 17:58+0200\n"
-"PO-Revision-Date: 2019-03-13 19:00+0000\n"
+"PO-Revision-Date: 2019-03-20 11:00+0000\n"
 "Last-Translator: yichengsd <sunzl@jxepub.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.pretix.eu/projects/"
 "pretix/pretix-plugin-sofort/zh_Hans/>\n"
@@ -123,15 +123,15 @@ msgstr "状态"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:18
 msgid "Payer name"
-msgstr ""
+msgstr "付款人姓名"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:20
 msgid "IBAN"
-msgstr ""
+msgstr "国际银行账号"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:22
 msgid "Bank"
-msgstr ""
+msgstr "银行"
 
 #: pretix_sofort/templates/pretix_sofort/pending.html:4
 msgid ""
@@ -147,15 +147,15 @@ msgstr ""
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:17
 msgid "The payment process has started in a new window."
-msgstr ""
+msgstr "付款流程已在新窗口中启动。"
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:20
 msgid "The window to enter your payment data was not opened or was closed?"
-msgstr ""
+msgstr "输入付款数据的窗口未打开或已关闭？"
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:24
 msgid "Click here in order to open the window."
-msgstr ""
+msgstr "单击此处打开窗口。"
 
 #: pretix_sofort/views.py:109
 msgid ""
@@ -186,4 +186,4 @@ msgstr ""
 msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
-msgstr ""
+msgstr "抱歉，付款过程中出错。请检查电子邮件中的链接以继续。"
