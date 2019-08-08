@@ -1,5 +1,5 @@
 Sofort payment
-==========================
+==============
 
 This is a plugin for `pretix`_. 
 
