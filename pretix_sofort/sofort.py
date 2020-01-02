@@ -169,14 +169,16 @@ class TransactionDetails:
         if no_sepa_data:
             if 'sender' in d['recipient']:
                 del d['sender']['account_number']
-            d['sender']['iban'] = (
-                d['sender']['iban'][:4]  + ('*' * (len(d['sender']['iban']) - 8)) + d['sender']['iban'][-4:]
-            )
+            if 'iban' in d['sender']:
+                d['sender']['iban'] = (
+                    d['sender']['iban'][:4]  + ('*' * (len(d['sender']['iban']) - 8)) + d['sender']['iban'][-4:]
+                )
             if 'account_number' in d['recipient']:
                 del d['recipient']['account_number']
-            d['recipient']['iban'] = (
-                d['recipient']['iban'][:4]  + ('*' * (len(d['recipient']['iban']) - 8)) + d['recipient']['iban'][-4:]
-            )
+            if 'iban' in d['recipient']:
+                d['recipient']['iban'] = (
+                    d['recipient']['iban'][:4]  + ('*' * (len(d['recipient']['iban']) - 8)) + d['recipient']['iban'][-4:]
+                )
         return d
 
     def to_json(self, no_sepa_data=False):
