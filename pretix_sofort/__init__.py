@@ -9,8 +9,9 @@ class PluginApp(AppConfig):
     verbose_name = 'Sofort payment'
 
     class PretixPluginMeta:
-        name = ugettext_lazy('Sofort payment')
+        name = 'SOFORT'
         author = 'Raphael Michel'
+        category = 'PAYMENT'
         description = ugettext_lazy('pretix payment via Klarna Sofort')
         visible = True
         version = __version__
