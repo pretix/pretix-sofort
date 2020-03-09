@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 __version__ = '1.3.3'
 
@@ -12,7 +12,7 @@ class PluginApp(AppConfig):
         name = 'SOFORT'
         author = 'Raphael Michel'
         category = 'PAYMENT'
-        description = ugettext_lazy('pretix payment via Klarna Sofort')
+        description = gettext_lazy('pretix payment via Klarna Sofort')
         visible = True
         version = __version__
 
