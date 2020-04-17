@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy
 
-__version__ = '1.3.3'
+__version__ = '1.3.4'
 
 
 class PluginApp(AppConfig):
