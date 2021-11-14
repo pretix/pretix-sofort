@@ -178,13 +178,13 @@ msgstr ""
 "Uw betaling kon niet worden verwerkt omdat het evenement in de tussentijd is "
 "uitverkocht. Neem contact op met de organisator voor meer informatie."
 
-#: pretix_sofort/views.py:133
+#: pretix_sofort/views.py:133 pretix_sofort/views.py:128
 msgid "The payment process has failed. You can click below to try again."
 msgstr ""
 "Het betalingsproces is mislukt. U kunt hieronder klikken om het opnieuw te "
 "proberen."
 
-#: pretix_sofort/views.py:136
+#: pretix_sofort/views.py:136 pretix_sofort/views.py:131
 msgid ""
 "Your payment has been started processing and will take a while to complete. "
 "We will send you an email once your payment is completed. If this takes "
@@ -194,17 +194,17 @@ msgstr ""
 "u een email sturen wanneer uw betaling is voltooid. Neem contact op met de "
 "organisator van het evenement als dit langer duurt dan verwacht."
 
-#: pretix_sofort/views.py:163
+#: pretix_sofort/views.py:163 pretix_sofort/views.py:158
 msgid "The payment process was canceled. You can click below to try again."
 msgstr ""
 "Het betalingsproces werd geannuleerd. U kunt hieronder klikken om het "
 "opnieuw te proberen."
 
-#: pretix_sofort/views.py:174
+#: pretix_sofort/views.py:174 pretix_sofort/views.py:169
 msgid "Sorry, there was an error in the payment process."
-msgstr "Sorry, is iets misgegaan in het betalingsproces."
+msgstr "Sorry, er is iets misgegaan in het betalingsproces."
 
-#: pretix_sofort/views.py:185
+#: pretix_sofort/views.py:185 pretix_sofort/views.py:180
 msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
@@ -212,8 +212,10 @@ msgstr ""
 "Sorry, er trad een fout op in het betalingsproces. Klik op de link in uw "
 "email om door te gaan."
 
-#~ msgid "Sofort payment"
-#~ msgstr "Sofortbetaling"
+#: pretix_sofort/__init__.py:12
+msgid "Sofort payment"
+msgstr "Sofortbetaling"
 
-#~ msgid "pretix payment via Klarna Sofort"
-#~ msgstr "pretix-betalingen via Klarna Sofort"
+#: pretix_sofort/__init__.py:14
+msgid "pretix payment via Klarna Sofort"
+msgstr "pretix-betalingen via Klarna Sofort"
