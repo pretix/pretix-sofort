@@ -1,7 +1,7 @@
 import hashlib
 import json
 import logging
-from _decimal import Decimal
+from decimal import Decimal
 
 from django.contrib import messages
 from django.core import signing
