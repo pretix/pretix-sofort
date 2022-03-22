@@ -12,8 +12,9 @@ class PluginApp(AppConfig):
         name = 'SOFORT'
         author = 'Raphael Michel'
         category = 'PAYMENT'
-        description = gettext_lazy('pretix payment via Klarna Sofort')
+        description = gettext_lazy('Accept payments through Sofort, a payment method offered by Klarna.')
         visible = True
+        picture = "pretix_sofort/logo.png"
         version = __version__
 
     def ready(self):

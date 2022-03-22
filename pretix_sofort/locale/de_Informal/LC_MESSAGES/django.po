@@ -2,25 +2,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-11 17:58+0200\n"
-"PO-Revision-Date: 2018-05-02 15:37+0000\n"
+"POT-Creation-Date: 2022-03-22 23:07+0100\n"
+"PO-Revision-Date: 2022-03-22 23:08+0100\n"
 "Last-Translator: Raphael Michel <michel@rami.io>\n"
 "Language-Team: German (informal) <https://translate.pretix.eu/projects/"
 "pretix/pretix-plugin-sofort/de_Informal/>\n"
-"Language: de_Informal\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.19.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: pretix_sofort/__init__.py:12
-msgid "Sofort payment"
-msgstr "Sofortüberweisung"
-
-#: pretix_sofort/__init__.py:14
-msgid "pretix payment via Klarna Sofort"
-msgstr "Sofortüberweisung für pretix"
+#: pretix_sofort/__init__.py:15
+msgid "Accept payments through Sofort, a payment method offered by Klarna."
+msgstr "Akzeptiere Zahlungen über Sofort, eine Zahlungsmethode von Klarna."
 
 #: pretix_sofort/payment.py:28
 msgid "Sofort"
@@ -180,12 +175,12 @@ msgstr ""
 "Zwischenzeit ausverkauft wurde. Bitte kontaktiere den Veranstalter für "
 "weitere Schritte."
 
-#: pretix_sofort/views.py:128
+#: pretix_sofort/views.py:133
 msgid "The payment process has failed. You can click below to try again."
 msgstr ""
 "Die Bezahlung ist fehlgeschlagen. Du kannst es weiter unten erneut versuchen."
 
-#: pretix_sofort/views.py:131
+#: pretix_sofort/views.py:136
 msgid ""
 "Your payment has been started processing and will take a while to complete. "
 "We will send you an email once your payment is completed. If this takes "
@@ -195,23 +190,29 @@ msgstr ""
 "senden dir eine E-Mail, sobald deine Zahlung vollständig ist. Wenn dies "
 "länger dauert als erwartet, kontaktiere bitte den Veranstalter."
 
-#: pretix_sofort/views.py:158
+#: pretix_sofort/views.py:163
 msgid "The payment process was canceled. You can click below to try again."
 msgstr ""
 "Die Zahlung wurde abgebrochen. Du kannst es mit dem untenstehenden Button "
 "erneut versuchen."
 
-#: pretix_sofort/views.py:169
+#: pretix_sofort/views.py:174
 msgid "Sorry, there was an error in the payment process."
 msgstr "Im Zahlungsvorgang ist ein Fehler aufgetreten."
 
-#: pretix_sofort/views.py:180
+#: pretix_sofort/views.py:185
 msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
 msgstr ""
 "Sorry, es gab einen Fehler im Bezahlvorgang. Bitte klicke den Link in der E-"
 "Mail, die wir dir geschickt haben, um fortzufahren."
+
+#~ msgid "Sofort payment"
+#~ msgstr "Sofortüberweisung"
+
+#~ msgid "pretix payment via Klarna Sofort"
+#~ msgstr "Sofortüberweisung für pretix"
 
 #~ msgid "Refund automatically?"
 #~ msgstr "Geld zurückbuchen?"

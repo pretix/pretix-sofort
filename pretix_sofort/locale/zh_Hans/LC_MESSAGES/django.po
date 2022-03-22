@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-11 17:58+0200\n"
+"POT-Creation-Date: 2022-03-22 23:07+0100\n"
 "PO-Revision-Date: 2019-03-20 11:00+0000\n"
 "Last-Translator: yichengsd <sunzl@jxepub.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.pretix.eu/projects/"
@@ -19,12 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 3.4\n"
 
-#: pretix_sofort/__init__.py:12
-msgid "Sofort payment"
-msgstr ""
-
-#: pretix_sofort/__init__.py:14
-msgid "pretix payment via Klarna Sofort"
+#: pretix_sofort/__init__.py:15
+msgid "Accept payments through Sofort, a payment method offered by Klarna."
 msgstr ""
 
 #: pretix_sofort/payment.py:28
@@ -163,26 +159,26 @@ msgid ""
 "Please contact the organizer for more information."
 msgstr ""
 
-#: pretix_sofort/views.py:128
+#: pretix_sofort/views.py:133
 msgid "The payment process has failed. You can click below to try again."
 msgstr ""
 
-#: pretix_sofort/views.py:131
+#: pretix_sofort/views.py:136
 msgid ""
 "Your payment has been started processing and will take a while to complete. "
 "We will send you an email once your payment is completed. If this takes "
 "longer than expected, contact the event organizer."
 msgstr ""
 
-#: pretix_sofort/views.py:158
+#: pretix_sofort/views.py:163
 msgid "The payment process was canceled. You can click below to try again."
 msgstr ""
 
-#: pretix_sofort/views.py:169
+#: pretix_sofort/views.py:174
 msgid "Sorry, there was an error in the payment process."
 msgstr ""
 
-#: pretix_sofort/views.py:180
+#: pretix_sofort/views.py:185
 msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
