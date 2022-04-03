@@ -8,13 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-22 23:07+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-04-04 06:00+0000\n"
+"Last-Translator: Liga V <lerning_by_dreaming@gmx.de>\n"
+"Language-Team: Latvian <https://translate.pretix.eu/projects/pretix/"
+"pretix-plugin-sofort/lv/>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 0 || n % 100 >= 11 && n % 100 <= "
+"19) ? 0 : ((n % 10 == 1 && n % 100 != 11) ? 1 : 2);\n"
+"X-Generator: Weblate 4.11.2\n"
 
 #: pretix_sofort/__init__.py:15
 msgid "Accept payments through Sofort, a payment method offered by Klarna."
@@ -26,7 +30,7 @@ msgstr ""
 
 #: pretix_sofort/payment.py:37
 msgid "Customer ID"
-msgstr ""
+msgstr "Klienta ID numurs"
 
 #: pretix_sofort/payment.py:41
 msgid "API key"
@@ -34,12 +38,12 @@ msgstr ""
 
 #: pretix_sofort/payment.py:45
 msgid "Project ID"
-msgstr ""
+msgstr "Projekta ID numurs"
 
 #: pretix_sofort/payment.py:122 pretix_sofort/payment.py:174
 #: pretix_sofort/views.py:71
 msgid "Sofort reported an error: {}"
-msgstr ""
+msgstr "Sofort pārskaitījums ziņo par šādu kļūdu: {}"
 
 #: pretix_sofort/payment.py:125 pretix_sofort/payment.py:177
 #: pretix_sofort/views.py:74
@@ -60,19 +64,19 @@ msgstr ""
 
 #: pretix_sofort/signals.py:25
 msgid "Transaction refunded"
-msgstr ""
+msgstr "Transakcijas maksājums tika atgriezts atpakaļ"
 
 #: pretix_sofort/signals.py:26
 msgid "Money not received"
-msgstr ""
+msgstr "Maksājums nav saņemts"
 
 #: pretix_sofort/signals.py:27
 msgid "Money not yet received"
-msgstr ""
+msgstr "Maksājums vēl nav saņemts"
 
 #: pretix_sofort/signals.py:28
 msgid "Money received"
-msgstr ""
+msgstr "Maksājums saņemts"
 
 #: pretix_sofort/signals.py:31
 #, python-brace-format
@@ -108,23 +112,23 @@ msgstr ""
 
 #: pretix_sofort/templates/pretix_sofort/control.html:10
 msgid "Time"
-msgstr ""
+msgstr "Laiks"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:14
 msgid "Status"
-msgstr ""
+msgstr "Statuss"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:18
 msgid "Payer name"
-msgstr ""
+msgstr "Maksātāja vārds"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:20
 msgid "IBAN"
-msgstr ""
+msgstr "IBAN"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:22
 msgid "Bank"
-msgstr ""
+msgstr "Banka"
 
 #: pretix_sofort/templates/pretix_sofort/pending.html:4
 msgid ""
@@ -144,7 +148,7 @@ msgstr ""
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:20
 msgid "The window to enter your payment data was not opened or was closed?"
-msgstr ""
+msgstr "Jūsu maksājuma datu ievadīšanas logs netika atvērts vai tika aizvērts?"
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:24
 msgid "Click here in order to open the window."
@@ -180,3 +184,5 @@ msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
 msgstr ""
+"Diemžēl maksājuma procesā radās kļūda. Lūdzu, pārbaudiet saiti savos e-pasta "
+"ziņojumos, lai turpinātu."
