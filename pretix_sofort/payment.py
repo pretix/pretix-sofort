@@ -13,6 +13,8 @@ from django.template.loader import get_template
 from django.utils.translation import gettext_lazy as _
 from typing import Union
 
+from requests import HTTPError
+
 from pretix.base.models import Order, OrderPayment, OrderRefund
 from pretix.base.payment import BasePaymentProvider, PaymentException
 from pretix.multidomain.urlreverse import build_absolute_uri
@@ -67,7 +69,7 @@ class Sofort(BasePaymentProvider):
         return True
 
     def _api_call(self, payload):
-        return requests.post(
+        r = requests.post(
             'https://api.sofort.com/api/xml',
             data=payload,
             auth=(self.settings.get('customer_id'), self.settings.get('api_key')),
@@ -75,7 +77,10 @@ class Sofort(BasePaymentProvider):
                 'Content-Type': 'application/xml; charset=UTF-8',
                 'Accept': 'application/xml; charset=UTF-8',
             }
-        ).content
+        )
+        if r.status_code >= 500:
+            raise HTTPError()
+        return r.content
 
     def redirect(self, request, url):
         if request.session.get('iframe_session', False):
