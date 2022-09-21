@@ -2,6 +2,8 @@ import json
 import logging
 
 from lxml import etree
+from lxml.etree import XMLSyntaxError
+
 from pretix import __version__ as pversion
 
 from . import __version__
@@ -124,7 +126,10 @@ class NewTransaction:
 
     @classmethod
     def from_xml(cls, xml):
-        root = etree.fromstring(xml)
+        try:
+            root = etree.fromstring(xml)
+        except XMLSyntaxError:
+            raise SofortError("Invalid XML received: " + xml)
         if root.tag == 'errors':
             raise SofortError(xml)
         return cls(
@@ -191,7 +196,10 @@ class Transactions:
 
     @classmethod
     def from_xml(cls, xml):
-        root = etree.fromstring(xml)
+        try:
+            root = etree.fromstring(xml)
+        except XMLSyntaxError:
+            raise SofortError("Invalid XML received: " + xml)
         if root.tag == 'errors':
             raise SofortError(xml)
 
@@ -228,7 +236,10 @@ class StatusNotification:
 
     @classmethod
     def from_xml(cls, xml):
-        root = etree.fromstring(xml)
+        try:
+            root = etree.fromstring(xml)
+        except XMLSyntaxError:
+            raise SofortError("Invalid XML received: " + xml)
         if root.tag == 'errors':
             raise SofortError(xml)
 
@@ -287,7 +298,10 @@ class Refunds:
 
     @classmethod
     def from_xml(cls, xml):
-        root = etree.fromstring(xml)
+        try:
+            root = etree.fromstring(xml)
+        except XMLSyntaxError:
+            raise SofortError("Invalid XML received: " + xml)
         if root.tag == 'errors':
             raise SofortError(xml)
 
