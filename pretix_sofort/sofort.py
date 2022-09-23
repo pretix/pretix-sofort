@@ -129,7 +129,7 @@ class NewTransaction:
         try:
             root = etree.fromstring(xml)
         except XMLSyntaxError:
-            raise SofortError("Invalid XML received: " + xml)
+            raise SofortError("Invalid XML received: " + xml.decode())
         if root.tag == 'errors':
             raise SofortError(xml)
         return cls(
@@ -199,7 +199,7 @@ class Transactions:
         try:
             root = etree.fromstring(xml)
         except XMLSyntaxError:
-            raise SofortError("Invalid XML received: " + xml)
+            raise SofortError("Invalid XML received: " + xml.decode())
         if root.tag == 'errors':
             raise SofortError(xml)
 
@@ -239,7 +239,7 @@ class StatusNotification:
         try:
             root = etree.fromstring(xml)
         except XMLSyntaxError:
-            raise SofortError("Invalid XML received: " + xml)
+            raise SofortError("Invalid XML received: " + xml.decode())
         if root.tag == 'errors':
             raise SofortError(xml)
 
@@ -301,7 +301,7 @@ class Refunds:
         try:
             root = etree.fromstring(xml)
         except XMLSyntaxError:
-            raise SofortError("Invalid XML received: " + xml)
+            raise SofortError("Invalid XML received: " + xml.decode())
         if root.tag == 'errors':
             raise SofortError(xml)
 
