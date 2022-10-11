@@ -1,6 +1,7 @@
 import hashlib
 import json
 import logging
+import urllib.parse
 from decimal import Decimal
 
 from django.contrib import messages
@@ -17,7 +18,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from pretix.base.models import Order, Quota, OrderPayment, OrderRefund
 from pretix.base.payment import PaymentException
-from pretix.multidomain.urlreverse import eventreverse
+from pretix.multidomain.urlreverse import eventreverse, build_absolute_uri
 from . import sofort
 from .models import ReferencedSofortTransaction
 from .payment import Sofort
@@ -47,17 +48,24 @@ def webhook(request, *args, **kwargs):
 
 @xframe_options_exempt
 def redirect_view(request, *args, **kwargs):
-    signer = signing.Signer(salt='safe-redirect')
     try:
-        url = signer.unsign(request.GET.get('url', ''))
+        data = signing.loads(request.GET.get('data', ''), salt='safe-redirect')
     except signing.BadSignature:
         return HttpResponseBadRequest('Invalid parameter')
 
-    r = render(request, 'pretix_sofort/redirect.html', {
-        'url': url,
-    })
-    r._csp_ignore = True
-    return r
+    if 'go' in request.GET:
+        if 'session' in data:
+            for k, v in data['session'].items():
+                request.session[k] = v
+        return redirect(data['url'])
+    else:
+        params = request.GET.copy()
+        params['go'] = '1'
+        r = render(request, 'pretix_sofort/redirect.html', {
+            'url': build_absolute_uri(request.event, 'plugins:pretix_sofort:redirect') + '?' + urllib.parse.urlencode(params),
+        })
+        r._csp_ignore = True
+        return r
 
 
 def process_result(request, rso, transaction, log=False, warn=True):
