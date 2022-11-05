@@ -189,7 +189,7 @@ class ReturnView(View):
         return self._redirect_to_order()
 
     def _redirect_to_order(self):
-        if self.request.session.get('sofort_order_secret') != self.order.secret:
+        if self.request.session.get('payment_sofort_order_secret') != self.order.secret:
             messages.error(self.request, _('Sorry, there was an error in the payment process. Please check the link '
                                            'in your emails to continue.'))
             return redirect(eventreverse(self.request.event, 'presale:event.index'))

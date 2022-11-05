@@ -97,7 +97,7 @@ class Sofort(BasePaymentProvider):
             return str(url)
 
     def execute_payment(self, request: HttpRequest, payment: OrderPayment):
-        request.session['sofort_order_secret'] = payment.order.secret
+        request.session['payment_sofort_order_secret'] = payment.order.secret
         shash = hashlib.sha1(payment.order.secret.lower().encode()).hexdigest()
         r = sofort.MultiPay(
             project_id=self.settings.get('project_id'),
