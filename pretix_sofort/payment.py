@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 class Sofort(BasePaymentProvider):
     identifier = 'sofort'
     verbose_name = _('Sofort')
+    public_name = _('SOFORT (instant bank transfer)')
     abort_pending_allowed = False
 
     @property

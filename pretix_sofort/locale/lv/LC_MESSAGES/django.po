@@ -24,35 +24,39 @@ msgstr ""
 msgid "Accept payments through Sofort, a payment method offered by Klarna."
 msgstr ""
 
-#: pretix_sofort/payment.py:28
+#: pretix_sofort/payment.py:30
 msgid "Sofort"
 msgstr ""
 
-#: pretix_sofort/payment.py:37
+#: pretix_sofort/payment.py:31
+msgid "SOFORT (instant bank transfer)"
+msgstr ""
+
+#: pretix_sofort/payment.py:40
 msgid "Customer ID"
 msgstr "Klienta ID numurs"
 
-#: pretix_sofort/payment.py:41
+#: pretix_sofort/payment.py:44
 msgid "API key"
 msgstr ""
 
-#: pretix_sofort/payment.py:45
+#: pretix_sofort/payment.py:48
 msgid "Project ID"
 msgstr "Projekta ID numurs"
 
-#: pretix_sofort/payment.py:122 pretix_sofort/payment.py:174
-#: pretix_sofort/views.py:71
+#: pretix_sofort/payment.py:132 pretix_sofort/payment.py:184
+#: pretix_sofort/views.py:79
 msgid "Sofort reported an error: {}"
 msgstr "Sofort pārskaitījums ziņo par šādu kļūdu: {}"
 
-#: pretix_sofort/payment.py:125 pretix_sofort/payment.py:177
-#: pretix_sofort/views.py:74
+#: pretix_sofort/payment.py:135 pretix_sofort/payment.py:187
+#: pretix_sofort/views.py:82
 msgid ""
 "We had trouble communicating with Sofort. Please try again and get in touch "
 "with us if this problem persists."
 msgstr ""
 
-#: pretix_sofort/payment.py:185
+#: pretix_sofort/payment.py:195
 msgid ""
 "We had trouble communicating with Sofort. Please try again and contact "
 "support if the problem persists."
@@ -150,36 +154,36 @@ msgstr ""
 msgid "The window to enter your payment data was not opened or was closed?"
 msgstr "Jūsu maksājuma datu ievadīšanas logs netika atvērts vai tika aizvērts?"
 
-#: pretix_sofort/templates/pretix_sofort/redirect.html:24
+#: pretix_sofort/templates/pretix_sofort/redirect.html:25
 msgid "Click here in order to open the window."
 msgstr ""
 
-#: pretix_sofort/views.py:109
+#: pretix_sofort/views.py:117
 msgid ""
 "Your payment could not be handled as the event sold out in the meantime. "
 "Please contact the organizer for more information."
 msgstr ""
 
-#: pretix_sofort/views.py:133
+#: pretix_sofort/views.py:141
 msgid "The payment process has failed. You can click below to try again."
 msgstr ""
 
-#: pretix_sofort/views.py:136
+#: pretix_sofort/views.py:144
 msgid ""
 "Your payment has been started processing and will take a while to complete. "
 "We will send you an email once your payment is completed. If this takes "
 "longer than expected, contact the event organizer."
 msgstr ""
 
-#: pretix_sofort/views.py:163
+#: pretix_sofort/views.py:171
 msgid "The payment process was canceled. You can click below to try again."
 msgstr ""
 
-#: pretix_sofort/views.py:174
+#: pretix_sofort/views.py:182
 msgid "Sorry, there was an error in the payment process."
 msgstr ""
 
-#: pretix_sofort/views.py:185
+#: pretix_sofort/views.py:193
 msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
