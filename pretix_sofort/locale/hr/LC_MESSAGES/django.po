@@ -1,0 +1,186 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-07 16:32+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: pretix_sofort/__init__.py:15
+msgid "Accept payments through Sofort, a payment method offered by Klarna."
+msgstr ""
+
+#: pretix_sofort/payment.py:30
+msgid "Sofort"
+msgstr ""
+
+#: pretix_sofort/payment.py:31
+msgid "SOFORT (instant bank transfer)"
+msgstr ""
+
+#: pretix_sofort/payment.py:40
+msgid "Customer ID"
+msgstr ""
+
+#: pretix_sofort/payment.py:44
+msgid "API key"
+msgstr ""
+
+#: pretix_sofort/payment.py:48
+msgid "Project ID"
+msgstr ""
+
+#: pretix_sofort/payment.py:132 pretix_sofort/payment.py:184
+#: pretix_sofort/views.py:79
+msgid "Sofort reported an error: {}"
+msgstr ""
+
+#: pretix_sofort/payment.py:135 pretix_sofort/payment.py:187
+#: pretix_sofort/views.py:82
+msgid ""
+"We had trouble communicating with Sofort. Please try again and get in touch "
+"with us if this problem persists."
+msgstr ""
+
+#: pretix_sofort/payment.py:195
+msgid ""
+"We had trouble communicating with Sofort. Please try again and contact "
+"support if the problem persists."
+msgstr ""
+
+#: pretix_sofort/signals.py:24
+msgid "Transaction started, no tracing possible"
+msgstr ""
+
+#: pretix_sofort/signals.py:25
+msgid "Transaction refunded"
+msgstr ""
+
+#: pretix_sofort/signals.py:26
+msgid "Money not received"
+msgstr ""
+
+#: pretix_sofort/signals.py:27
+msgid "Money not yet received"
+msgstr ""
+
+#: pretix_sofort/signals.py:28
+msgid "Money received"
+msgstr ""
+
+#: pretix_sofort/signals.py:31
+#, python-brace-format
+msgid "Sofort reported a status notification: {status}"
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/action_overpaid.html:5
+#, python-format
+msgid ""
+"The Sofort transaction %(trans)s has succeeded, but the order %(order)s is "
+"expired and the product was sold out in the meantime. Therefore, the payment "
+"could not be accepted. Please contact the user and refund the money via "
+"Sofort's interface."
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/action_refund.html:4
+#, python-format
+msgid ""
+"Sofort reported that the transaction %(trans)s has been refunded. Do you "
+"want to refund mark the matching order (%(order)s) as refunded?"
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/checkout_payment_confirm.html:3
+#: pretix_sofort/templates/pretix_sofort/checkout_payment_form.html:3
+msgid ""
+"After you submitted your order, we will redirect you to Sofort to complete "
+"your payment. You will then be redirected back here to get your tickets."
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/control.html:6
+msgid "Transaction"
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/control.html:10
+msgid "Time"
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/control.html:14
+msgid "Status"
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/control.html:18
+msgid "Payer name"
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/control.html:20
+msgid "IBAN"
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/control.html:22
+msgid "Bank"
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/pending.html:4
+msgid ""
+"Our attempt to execute your payment has failed. Please try again or contact "
+"us."
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/pending.html:8
+msgid ""
+"We're waiting for an answer regarding your payment. Please contact us, if "
+"this takes more than a few hours."
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/redirect.html:17
+msgid "The payment process has started in a new window."
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/redirect.html:20
+msgid "The window to enter your payment data was not opened or was closed?"
+msgstr ""
+
+#: pretix_sofort/templates/pretix_sofort/redirect.html:25
+msgid "Click here in order to open the window."
+msgstr ""
+
+#: pretix_sofort/views.py:117
+msgid ""
+"Your payment could not be handled as the event sold out in the meantime. "
+"Please contact the organizer for more information."
+msgstr ""
+
+#: pretix_sofort/views.py:141
+msgid "The payment process has failed. You can click below to try again."
+msgstr ""
+
+#: pretix_sofort/views.py:144
+msgid ""
+"Your payment has been started processing and will take a while to complete. "
+"We will send you an email once your payment is completed. If this takes "
+"longer than expected, contact the event organizer."
+msgstr ""
+
+#: pretix_sofort/views.py:171
+msgid "The payment process was canceled. You can click below to try again."
+msgstr ""
+
+#: pretix_sofort/views.py:182
+msgid "Sorry, there was an error in the payment process."
+msgstr ""
+
+#: pretix_sofort/views.py:193
+msgid ""
+"Sorry, there was an error in the payment process. Please check the link in "
+"your emails to continue."
+msgstr ""
