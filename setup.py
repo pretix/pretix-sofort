@@ -3,6 +3,7 @@ from distutils.command.build import build
 
 from django.core import management
 from setuptools import setup, find_packages
+from pretix_sofort import __version__
 
 
 try:
@@ -25,7 +26,7 @@ cmdclass = {
 
 setup(
     name='pretix-sofort',
-    version='1.3.7',
+    version=__version__,
     description='pretix payment via Klarna Sofort',
     long_description=long_description,
     url='https://github.com/pretix/pretix-sofort',
