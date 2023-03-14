@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-07 16:32+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-03-17 22:00+0000\n"
+"Last-Translator: Michael <michael.happl@gmx.at>\n"
+"Language-Team: Czech <https://translate.pretix.eu/projects/pretix/"
+"pretix-plugin-sofort/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.16.4\n"
 
 #: pretix_sofort/__init__.py:15
 msgid "Accept payments through Sofort, a payment method offered by Klarna."
@@ -26,7 +29,7 @@ msgstr ""
 
 #: pretix_sofort/payment.py:31
 msgid "SOFORT (instant bank transfer)"
-msgstr ""
+msgstr "SOFORT (okamžitý bankovní převod)"
 
 #: pretix_sofort/payment.py:40
 msgid "Customer ID"
@@ -116,7 +119,7 @@ msgstr ""
 
 #: pretix_sofort/templates/pretix_sofort/control.html:14
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:18
 msgid "Payer name"
@@ -144,15 +147,15 @@ msgstr ""
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:17
 msgid "The payment process has started in a new window."
-msgstr ""
+msgstr "Proces platby se spustil v novém okně."
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:20
 msgid "The window to enter your payment data was not opened or was closed?"
-msgstr ""
+msgstr "Okno pro zadání platebních údajů se neotevřelo nebo bylo zavřeno?"
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:25
 msgid "Click here in order to open the window."
-msgstr ""
+msgstr "Kliknutím zde otevřete okno."
 
 #: pretix_sofort/views.py:117
 msgid ""
@@ -184,3 +187,5 @@ msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
 msgstr ""
+"Omlouváme se, při platbě došlo k chybě. Zkontrolujte prosím odkaz ve svých e-"
+"mailech a pokračujte."
