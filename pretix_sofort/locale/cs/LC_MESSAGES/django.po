@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-07 16:32+0100\n"
-"PO-Revision-Date: 2023-03-19 06:00+0000\n"
+"PO-Revision-Date: 2023-03-19 18:00+0000\n"
 "Last-Translator: Michael <michael.happl@gmx.at>\n"
 "Language-Team: Czech <https://translate.pretix.eu/projects/pretix/"
 "pretix-plugin-sofort/cs/>\n"
@@ -127,11 +127,11 @@ msgstr "Jméno poplatníka"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:20
 msgid "IBAN"
-msgstr ""
+msgstr "IBAN"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:22
 msgid "Bank"
-msgstr ""
+msgstr "Banka"
 
 #: pretix_sofort/templates/pretix_sofort/pending.html:4
 msgid ""
