@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-07 16:32+0100\n"
-"PO-Revision-Date: 2022-02-21 07:00+0000\n"
-"Last-Translator: Emanuele Signoretta <signorettae@gmail.com>\n"
-"Language-Team: Italian <https://translate.pretix.eu/projects/pretix/pretix-"
-"plugin-sofort/it/>\n"
+"PO-Revision-Date: 2023-05-18 01:00+0000\n"
+"Last-Translator: M C <micasadmail@gmail.com>\n"
+"Language-Team: Italian <https://translate.pretix.eu/projects/pretix/"
+"pretix-plugin-sofort/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8\n"
+"X-Generator: Weblate 4.17\n"
 
 #: pretix_sofort/__init__.py:15
 msgid "Accept payments through Sofort, a payment method offered by Klarna."
@@ -137,7 +137,7 @@ msgstr "Pagante"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:20
 msgid "IBAN"
-msgstr "Codice IBAN"
+msgstr "IBAN"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:22
 msgid "Bank"
@@ -164,8 +164,10 @@ msgid "The payment process has started in a new window."
 msgstr "Il processo di pagamento è iniziato in una nuova finestra."
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:20
+#, fuzzy
 msgid "The window to enter your payment data was not opened or was closed?"
-msgstr "La finestra di pagamento non è stata aperta o è stata chiusa?"
+msgstr ""
+"La finestra per inserire i dati di pagamento non era aperta o era chiusa?"
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:25
 msgid "Click here in order to open the window."
@@ -208,8 +210,8 @@ msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
 msgstr ""
-"Scusa, c'è stato un errore durante l'elaborazione del pagamento. Per favore "
-"controlla il link nelle email ricevute per continuare."
+"Spiacenti, c'è stato un errore durante il pagamento. Segui il link "
+"nell'email per continuare."
 
 #, fuzzy
 #~ msgid "Sofort payment"
