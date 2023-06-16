@@ -15,7 +15,7 @@ class SofortError(Exception):
     def __init__(self, xml):
         errors = etree.fromstring(xml)
         strl = []
-        for e in errors:
+        for e in errors.xpath('error'):
             strl.append(e.xpath('message')[0].text)
         self.message = ', '.join(strl)
 
