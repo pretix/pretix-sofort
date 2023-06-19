@@ -135,8 +135,10 @@ def process_result(request, rso, transaction, log=False, warn=True):
                 'info': str(td)
             })
             if rso.order.pending_sum > 0:
-                rso.order.status = Order.STATUS_PENDING
-                rso.order.save()
+                with transaction.atomic():
+                    rso.order.status = Order.STATUS_PENDING
+                    rso.order.save()
+                    rso.order.create_transactions()
         elif warn:
             messages.error(request, _('The payment process has failed. You can click below to try again.'))
     elif warn:
