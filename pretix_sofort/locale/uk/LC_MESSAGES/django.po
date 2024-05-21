@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-07 16:32+0100\n"
-"PO-Revision-Date: 2024-05-15 21:00+0000\n"
+"PO-Revision-Date: 2024-05-21 20:00+0000\n"
 "Last-Translator: Serhii Horichenko <m@sgg.im>\n"
 "Language-Team: Ukrainian <https://translate.pretix.eu/projects/pretix/"
 "pretix-plugin-sofort/uk/>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.5.3\n"
+"X-Generator: Weblate 5.5.5\n"
 
 #: pretix_sofort/__init__.py:15
 msgid "Accept payments through Sofort, a payment method offered by Klarna."
-msgstr ""
+msgstr "Приймайте платежі через Sofort, спосіб оплати від Klarna."
 
 #: pretix_sofort/payment.py:30
 msgid "Sofort"
@@ -30,7 +30,7 @@ msgstr "Sofort"
 
 #: pretix_sofort/payment.py:31
 msgid "SOFORT (instant bank transfer)"
-msgstr ""
+msgstr "SOFORT (миттєвий банківський переказ)"
 
 #: pretix_sofort/payment.py:40
 msgid "Customer ID"
@@ -38,16 +38,16 @@ msgstr "ID Покупця"
 
 #: pretix_sofort/payment.py:44
 msgid "API key"
-msgstr ""
+msgstr "Ключ API"
 
 #: pretix_sofort/payment.py:48
 msgid "Project ID"
-msgstr ""
+msgstr "ID проєкту"
 
 #: pretix_sofort/payment.py:132 pretix_sofort/payment.py:184
 #: pretix_sofort/views.py:79
 msgid "Sofort reported an error: {}"
-msgstr ""
+msgstr "Sofort повідомляє про помилку: {}"
 
 #: pretix_sofort/payment.py:135 pretix_sofort/payment.py:187
 #: pretix_sofort/views.py:82
@@ -55,37 +55,41 @@ msgid ""
 "We had trouble communicating with Sofort. Please try again and get in touch "
 "with us if this problem persists."
 msgstr ""
+"У нас виникли проблеми під час обміну даними із Sofort. Спробуйте, будь "
+"ласка, ще раз, але якщо проблема залишиться, зв’яжіться з нами."
 
 #: pretix_sofort/payment.py:195
 msgid ""
 "We had trouble communicating with Sofort. Please try again and contact "
 "support if the problem persists."
 msgstr ""
+"У нас виникли проблеми під час обміну даними із Sofort. Спробуйте, будь "
+"ласка, ще раз, але якщо проблема залишиться, зв’яжіться з підтримкою."
 
 #: pretix_sofort/signals.py:24
 msgid "Transaction started, no tracing possible"
-msgstr ""
+msgstr "Транзакцію розпочато, відстеження неможливе"
 
 #: pretix_sofort/signals.py:25
 msgid "Transaction refunded"
-msgstr ""
+msgstr "Транзакцію відшкодовано"
 
 #: pretix_sofort/signals.py:26
 msgid "Money not received"
-msgstr ""
+msgstr "Гроші не отримані"
 
 #: pretix_sofort/signals.py:27
 msgid "Money not yet received"
-msgstr ""
+msgstr "Гроші ще не отримані"
 
 #: pretix_sofort/signals.py:28
 msgid "Money received"
-msgstr ""
+msgstr "Гроші отримані"
 
 #: pretix_sofort/signals.py:31
 #, python-brace-format
 msgid "Sofort reported a status notification: {status}"
-msgstr ""
+msgstr "Sofort повідомляє про новий статус: {status}"
 
 #: pretix_sofort/templates/pretix_sofort/action_overpaid.html:5
 #, python-format
@@ -95,13 +99,19 @@ msgid ""
 "could not be accepted. Please contact the user and refund the money via "
 "Sofort's interface."
 msgstr ""
+"Транзакція Sofort %(trans)s була успішною, але час на замовлення %(order)s "
+"закінчився, а продукт тим часом розпродано. Тому оплату прийняти не можна. "
+"Зв'яжіться, будь ласка, з користувачем та відшкодуйте кошти через інтерфейс "
+"Sofort."
 
 #: pretix_sofort/templates/pretix_sofort/action_refund.html:4
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Sofort reported that the transaction %(trans)s has been refunded. Do you "
 "want to refund mark the matching order (%(order)s) as refunded?"
 msgstr ""
+"Sofort повідомляє, що транзакція %(trans)s була відшкодована. Ви хочете "
+"позначити відповідне замовлення (%(order)s) як повернене?"
 
 #: pretix_sofort/templates/pretix_sofort/checkout_payment_confirm.html:3
 #: pretix_sofort/templates/pretix_sofort/checkout_payment_form.html:3
@@ -109,14 +119,16 @@ msgid ""
 "After you submitted your order, we will redirect you to Sofort to complete "
 "your payment. You will then be redirected back here to get your tickets."
 msgstr ""
+"Після завершення замовлення, ми перенаправимо Вас до Sofort для здійснення "
+"оплати. Потім, для отримання квитків, Ви будете перенаправлені назад сюди."
 
 #: pretix_sofort/templates/pretix_sofort/control.html:6
 msgid "Transaction"
-msgstr ""
+msgstr "Транзакція"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:10
 msgid "Time"
-msgstr ""
+msgstr "Час"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:14
 msgid "Status"
@@ -124,31 +136,35 @@ msgstr "Статус"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:18
 msgid "Payer name"
-msgstr ""
+msgstr "Ім'я платника"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:20
 msgid "IBAN"
-msgstr ""
+msgstr "IBAN"
 
 #: pretix_sofort/templates/pretix_sofort/control.html:22
 msgid "Bank"
-msgstr ""
+msgstr "Банк"
 
 #: pretix_sofort/templates/pretix_sofort/pending.html:4
 msgid ""
 "Our attempt to execute your payment has failed. Please try again or contact "
 "us."
 msgstr ""
+"Наша спроба виконання Вашого платежу не вдалася. Спробуйте, будь ласка, ще "
+"раз або зв'яжіться з нами."
 
 #: pretix_sofort/templates/pretix_sofort/pending.html:8
 msgid ""
 "We're waiting for an answer regarding your payment. Please contact us, if "
 "this takes more than a few hours."
 msgstr ""
+"Чекаємо на відповідь щодо Вашого платежу. Будь ласка, зв’яжіться з нами, "
+"якщо це займе більше кількох годин."
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:17
 msgid "The payment process has started in a new window."
-msgstr "Процес оплати розпочався в новому вікні."
+msgstr "Процес оплати розпочався у новому вікні."
 
 #: pretix_sofort/templates/pretix_sofort/redirect.html:20
 msgid "The window to enter your payment data was not opened or was closed?"
@@ -164,10 +180,12 @@ msgid ""
 "Your payment could not be handled as the event sold out in the meantime. "
 "Please contact the organizer for more information."
 msgstr ""
+"Ваш платіж не вдалося обробити, оскільки подія була розпродана. За "
+"додатковою інформацією зверніться, будь ласка, до організатора."
 
 #: pretix_sofort/views.py:141
 msgid "The payment process has failed. You can click below to try again."
-msgstr ""
+msgstr "Збій процесу оплати. Для повторної спроби можете натиснути нижче."
 
 #: pretix_sofort/views.py:144
 msgid ""
@@ -175,19 +193,22 @@ msgid ""
 "We will send you an email once your payment is completed. If this takes "
 "longer than expected, contact the event organizer."
 msgstr ""
+"Розпочато обробку Вашого платежу і це займе деякий час. Коли Ваш платіж буде "
+"опрацьовано, ми повідомимо Вас електронним листом. Якщо це займе більше "
+"очікуваного часу, зверніться до організатора заходу чи події."
 
 #: pretix_sofort/views.py:171
 msgid "The payment process was canceled. You can click below to try again."
-msgstr ""
+msgstr "Процес оплати скасовано. Для повторної спроби можете натиснути нижче."
 
 #: pretix_sofort/views.py:182
 msgid "Sorry, there was an error in the payment process."
-msgstr ""
+msgstr "На жаль, під час оплати виникла помилка."
 
 #: pretix_sofort/views.py:193
 msgid ""
 "Sorry, there was an error in the payment process. Please check the link in "
 "your emails to continue."
 msgstr ""
-"На жаль, під час оплати сталася помилка. Для продовження, перевірте, будь "
+"На жаль, під час оплати виникла помилка. Для продовження, перевірте, будь "
 "ласка, посилання у своїх електронних листах."
