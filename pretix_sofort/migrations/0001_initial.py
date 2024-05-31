@@ -11,16 +11,33 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('pretixbase', '0088_auto_20180328_1217'),
+        ("pretixbase", "0088_auto_20180328_1217"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ReferencedSofortTransaction',
+            name="ReferencedSofortTransaction",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('reference', models.CharField(db_index=True, max_length=190, unique=True)),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pretixbase.Order')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "reference",
+                    models.CharField(db_index=True, max_length=190, unique=True),
+                ),
+                (
+                    "order",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="pretixbase.Order",
+                    ),
+                ),
             ],
         ),
     ]
