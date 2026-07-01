@@ -100,7 +100,7 @@ class Sofort(BasePaymentProvider):
                             ],
                         },
                     },
-                    salt="safe-redirect",
+                    salt="plugins:sofort:redirect:safe-redirect-data",
                 )
             )
         else:
