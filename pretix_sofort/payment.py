@@ -29,15 +29,6 @@ class Sofort(BaseHistoricalPaymentProvider):
         }
         return template.render(ctx)
 
-    def order_can_retry(self, order):
-        return True
-
-    def payment_refund_supported(self, payment: OrderPayment):
-        return True
-
-    def payment_partial_refund_supported(self, payment: OrderPayment):
-        return True
-
     def shred_payment_info(self, obj: Union[OrderPayment, OrderRefund]):
         d = obj.info_data
         new = {"_shreded": True}
