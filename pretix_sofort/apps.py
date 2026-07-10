@@ -13,7 +13,7 @@ class PluginApp(AppConfig):
         author = "Raphael Michel"
         category = "PAYMENT"
         description = gettext_lazy(
-            "Accept payments through Sofort, a payment method offered by Klarna."
+            "Deprecated plugin, do not use except if you have historically used it."
         )
         visible = True
         picture = "pretix_sofort/logo.png"
